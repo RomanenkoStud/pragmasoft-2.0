@@ -1,0 +1,52 @@
+---
+import type { Stats as Props } from '~/types';
+import WidgetWrapper from '../ui/WidgetWrapper.astro';
+import Headline from '../ui/Headline.astro';
+import { Icon } from 'astro-icon/components';
+import { getImage } from "astro:assets";
+
+import backgroundImage from '~/assets/images/stats/10+txt-2.png';
+
+const {
+  title = await Astro.slots.render('title'),
+  subtitle = await Astro.slots.render('subtitle'),
+  tagline,
+  stats = [],
+
+  id,
+  isDark = false,
+  classes = {},
+  bg = await Astro.slots.render('bg'),
+} = Astro.props;
+
+const optimizedBackground = await getImage({src: backgroundImage, format: 'png'});
+---
+
+<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-6xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
+  <Headline title={title} subtitle={subtitle} tagline={tagline} />
+  <div class="flex flex-wrap justify-center mx-auto text-center [background:var(--pragma-stats-bg)] w-[856px] h-[338px] px-[36px]"
+    style={`--pragma-stats-bg:url(${optimizedBackground.src})`}>
+    {
+      stats &&
+        stats.map(({ amount, title, icon }) => (
+          <div class="p-4 md:w-1/4 sm:w-1/2 w-full min-w-[calc(100%/4)] text-center leading-none dark:md:border-slate-500 even:mt-[110px]">
+            {icon && (
+              <div class="flex items-center justify-center mx-auto mb-4 text-primary">
+                <Icon name={icon} class="w-10 h-10" />
+              </div>
+            )}
+            {amount && (
+              <div class="font-heading text-secondary font-thin italic dark:text-white text-[72px]">
+                {amount}
+              </div>
+            )}
+            {title && (
+              <div class="text-[12px] font-medium uppercase tracking-widest text-gray-800 dark:text-slate-400">
+                {title}
+              </div>
+            )}
+          </div>
+        ))
+    }
+  </div>
+</WidgetWrapper>
