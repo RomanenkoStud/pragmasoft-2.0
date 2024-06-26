@@ -10,6 +10,8 @@ import Stats2 from '~/components/widgets/Stats2.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import WhatWeOffer from '~/components/widgets/WhatWeOffer.astro';
 
+import Paralax from '~/components/custom/Paralax.astro';
+
 import backgroundWhite from '~/assets/images/hero/background.jpg';
 import backgroundColor from '~/assets/images/hero/top-calor-tr3.png';
 
@@ -60,7 +62,7 @@ const optimizedEmailManager = await getImage({src: emailManager, format: 'jpg'})
               alt=""
             />
             <Image
-              class="hidden lg:block"
+              class="slogan hidden lg:block [&:not(.slogan-active)]:-translate-x-96 duration-1000 transition-transform"
               loading="eager"
               width={439}
               height={114}
@@ -70,6 +72,13 @@ const optimizedEmailManager = await getImage({src: emailManager, format: 'jpg'})
           </div>
         </div>
       </div>
+      <script>
+        document.addEventListener('astro:page-load', () => {
+          [...document.querySelectorAll('.slogan')].forEach((el) => {
+            el.classList.add('slogan-active');
+          })
+        });
+      </script>
     </Fragment>
     <Fragment slot="content">
       <Testimonials2
@@ -88,7 +97,7 @@ const optimizedEmailManager = await getImage({src: emailManager, format: 'jpg'})
     </Fragment>
   </Hero3>
 
-  <div class="w-full bg-[#31cbaa]">
+  <div class="w-full bg-[#31cbaa]" id="about">
     <!-- Stats Widget ****************** -->
     <Stats2
       stats={[
@@ -102,69 +111,79 @@ const optimizedEmailManager = await getImage({src: emailManager, format: 'jpg'})
     </div>      
   </div>
 
-  <!-- Content Widget **************** -->
+  <div id="projects" class="paralax-container">
+    <!-- Content Widget **************** -->
 
-  <Features4
-    id="mobile-app-development"
-    title="MOBILE APP DEVELOPMENT"
-    classes={{
-      container: "bg-[#81CDDB] max-w-full", 
-      headline: {
-        title: "font-thin text-5xl mb-20 text-center", 
-        container: "text-start text-xl md:w-[970px] mx-auto",
-      },
-      items: {
-        container: "md:w-[970px]  mx-auto"
-      }
-    }}
-    columns={4}
-    items={[{
-      title: 'Elfishki',
-      description: "Network Reachability, Core Graphics Framework",
-      image: {src: optimizedElfishki.src, alt: "Elfishki"},
-    },{
-      title: 'iSIgn',
-      description: "Network Reachability, Core Graphics Framework",
-      image: {src: optimizediSign.src, alt: "iSIgn"},
-    },{
-      title: 'MLS',
-      description: "JavaEE, Spring, Hibernate, JavaME, C++, ATL, WTL, MFC",
-      image: {src: optimizedMls.src, alt: "MLS"},
-    },{
-      title: 'Memeco',
-      description: "Design, iPhone, icon design, HTML, CSS, Blackberry, Nokia",
-      image: {src: optimizedMemeco.src, alt: "Memeco"},
-    },{
-      title: 'COLORING BOOK APP',
-      description: "Facebook API, Media Player Framework",
-      image: {src: optimizedcoloringBook.src, alt: "COLORING BOOK APP"},
-    },{
-      title: 'Vyke',
-      description: "AndroidSDK",
-      image: {src: optimizedVyke.src, alt: "Vyke"},
-    },{
-      title: 'Wlcome',
-      description: "J2EE (EJB 3.0, JPA, JAX-RS), Arquillian for testing",
-      image: {src: optimizedWlcome.src, alt: "Wlcome"},
-    },{
-      title: 'EMAIL MANAGER',
-      description: "UIKit, Custom Table View Control, Async Web Requests",
-      image: {src: optimizedEmailManager.src, alt: "EMAIL MANAGER"},
-    },]}
-  >
-    <Fragment slot="subtitle">
-      <p>In today's world, phones have long ceased to be a communication means only. They enable us to be in touch with our near and dear ones, to stay tuned, to kill time in queues,to stay in social networks for hours  or to play applications. We keep so much information in our phones that can hardly imagine life without them. Precisely these needs created a great space for mobile developers.</p>
-      <p>We really are professionals in mobile software development and can offer you not only a full cycle software development process for IOS, Android, Blackberry mobile platforms, but also the server-side.</p><br /><br />
+    <Features4
+      id="mobile-app-development"
+      title="MOBILE APP DEVELOPMENT"
+      classes={{
+        container: "bg-[#81CDDB] max-w-full", 
+        headline: {
+          title: "font-thin text-[40px] mb-20 text-center", 
+          container: "text-start text-[18px] md:w-[970px] mx-auto",
+        },
+        items: {
+          container: "paralax-items text-[18px] mt-[105px] mb-[70px] md:w-[970px] mx-auto"
+        }
+      }}
+      columns={4}
+      items={[{
+        title: 'Elfishki',
+        description: "Network Reachability, Core Graphics Framework",
+        image: {src: optimizedElfishki.src, alt: "Elfishki"},
+        href: '#',
+      },{
+        title: 'iSIgn',
+        description: "Network Reachability, Core Graphics Framework",
+        image: {src: optimizediSign.src, alt: "iSIgn"},
+        href: '#',
+      },{
+        title: 'MLS',
+        description: "JavaEE, Spring, Hibernate, JavaME, C++, ATL, WTL, MFC",
+        image: {src: optimizedMls.src, alt: "MLS"},
+        href: '#',
+      },{
+        title: 'Memeco',
+        description: "Design, iPhone, icon design, HTML, CSS, Blackberry, Nokia",
+        image: {src: optimizedMemeco.src, alt: "Memeco"},
+        href: '#',
+      },{
+        title: 'COLORING BOOK APP',
+        description: "Facebook API, Media Player Framework",
+        image: {src: optimizedcoloringBook.src, alt: "COLORING BOOK APP"},
+        href: '#',
+      },{
+        title: 'Vyke',
+        description: "AndroidSDK",
+        image: {src: optimizedVyke.src, alt: "Vyke"},
+        href: '#',
+      },{
+        title: 'Wlcome',
+        description: "J2EE (EJB 3.0, JPA, JAX-RS), Arquillian for testing",
+        image: {src: optimizedWlcome.src, alt: "Wlcome"},
+        href: '#',
+      },{
+        title: 'EMAIL MANAGER',
+        description: "UIKit, Custom Table View Control, Async Web Requests",
+        image: {src: optimizedEmailManager.src, alt: "EMAIL MANAGER"},
+        href: '#',
+      },]}
+    >
+      <Fragment slot="subtitle">
+        <p>In today's world, phones have long ceased to be a communication means only. They enable us to be in touch with our near and dear ones, to stay tuned, to kill time in queues,to stay in social networks for hours  or to play applications. We keep so much information in our phones that can hardly imagine life without them. Precisely these needs created a great space for mobile developers.</p>
+        <p>We really are professionals in mobile software development and can offer you not only a full cycle software development process for IOS, Android, Blackberry mobile platforms, but also the server-side.</p><br /><br />
 
-      <p class="uppercase">What we offer</p>
-      <ul class="list-disc">
-        <li>IOS,</li>
-        <li>Android,</li>
-        <li>Cross platform,</li>
-        <li>Server-side,</li>
-        <li>Client solutions.</li>
-      </ul>
-    </Fragment>
-  </Features4>
-
+        <p class="uppercase">What we offer</p>
+        <ul class="list-disc">
+          <li>IOS,</li>
+          <li>Android,</li>
+          <li>Cross platform,</li>
+          <li>Server-side,</li>
+          <li>Client solutions.</li>
+        </ul>
+      </Fragment>
+    </Features4>
+    <Paralax/>
+  </div>
 </Layout>

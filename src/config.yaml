@@ -1,6 +1,6 @@
 site:
-  name: AstroWind
-  site: 'https://astrowind.vercel.app'
+  name: PragmaSoft
+  site: 'https://pragmasoft.com.ua'
   base: '/'
   trailingSlash: false
 
@@ -9,14 +9,14 @@ site:
 # Default SEO metadata
 metadata:
   title:
-    default: AstroWind
-    template: '%s — AstroWind'
-  description: "\U0001F680 Suitable for Startups, Small Business, Sass Websites, Professional Portfolios, Marketing Websites, Landing Pages & Blogs."
+    default: PragmaSoft
+    template: '%s — PragmaSoft'
+  description: "\U0001F680 PragmaSoft is a team of highly qualified specialists with almost 20 years of successful software development."
   robots:
     index: true
     follow: true
   openGraph:
-    site_name: AstroWind
+    site_name: PragmaSoft
     images:
       - url: '~/assets/images/default.png'
         width: 1200

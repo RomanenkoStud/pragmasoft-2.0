@@ -40,6 +40,44 @@ import { UI } from 'astrowind:config';
     }
   }
 
+  function initActiveLink() {
+    const sections = document.querySelectorAll('#about, #projects'); 
+    let currentActiveSection;
+
+    const updateActiveSection = () => {
+      const windowHeight = window.innerHeight;
+
+      for (const section of sections) {
+        const rect = section.getBoundingClientRect();
+        const isPartiallyAbove = rect.top <= windowHeight && rect.top + section.offsetHeight > 0;
+
+        const isVisible = isPartiallyAbove;
+        const intersectionRatio = Math.min(rect.height, windowHeight) / section.offsetHeight;
+
+        const isActive = isVisible && intersectionRatio >= 0.5;
+
+        if (isActive && section.id !== currentActiveSection) {
+          const matchingLink = document.querySelector(`a[href="#${section.id}"]`);
+          if (matchingLink) {
+            matchingLink.parentElement.classList.toggle('active', true);
+          }
+          if (currentActiveSection) {
+            const prevLink = document.querySelector(`a[href="#${currentActiveSection}"]`);
+            if (prevLink) {
+              prevLink.parentElement.classList.remove('active');
+            }
+          }
+          currentActiveSection = section.id;
+        }
+      }
+    };
+
+    window.addEventListener('scroll', updateActiveSection);
+    window.addEventListener('resize', updateActiveSection);
+
+    updateActiveSection();
+  }
+
   const onLoad = function () {
     // let lastKnownScrollPosition = window.scrollY;
     let ticking = true;
@@ -116,17 +154,17 @@ import { UI } from 'astrowind:config';
       document.querySelector('#header > div > div:last-child')?.classList.add('hidden');
     });
 
-    // function applyHeaderStylesOnScroll() {
-    //   const header = document.querySelector('#header[data-aw-sticky-header]');
-    //   if (!header) return;
-    //   if (lastKnownScrollPosition > 60 && !header.classList.contains('scroll')) {
-    //     header.classList.add('scroll');
-    //   } else if (lastKnownScrollPosition <= 60 && header.classList.contains('scroll')) {
-    //     header.classList.remove('scroll');
-    //   }
-    //   ticking = false;
-    // }
-    // applyHeaderStylesOnScroll();
+    function applyHeaderStylesOnScroll() {
+      // const header = document.querySelector('#header[data-aw-sticky-header]');
+      // if (!header) return;
+      // if (lastKnownScrollPosition > 60 && !header.classList.contains('scroll')) {
+      //   header.classList.add('scroll');
+      // } else if (lastKnownScrollPosition <= 60 && header.classList.contains('scroll')) {
+      //   header.classList.remove('scroll');
+      // }
+      ticking = false;
+    }
+    applyHeaderStylesOnScroll();
 
     attachEvent([document], 'scroll', function () {
       lastKnownScrollPosition = window.scrollY;
@@ -138,6 +176,8 @@ import { UI } from 'astrowind:config';
         ticking = true;
       }
     });
+
+    initActiveLink();
   };
   const onPageShow = function () {
     document.documentElement.classList.add('motion-safe:scroll-smooth');

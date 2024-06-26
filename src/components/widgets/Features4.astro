@@ -2,7 +2,11 @@
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
 import ItemGrid3 from '~/components/ui/ItemGrid3.astro';
-import type { Features as Props } from '~/types';
+import type { Features, ClickableItem } from '~/types';
+
+interface Props extends Features {
+  items: ClickableItem[];
+}
 
 const {
   title = await Astro.slots.render('title'),
@@ -19,7 +23,7 @@ const {
 } = Astro.props;
 ---
 
-<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
+<WidgetWrapper id={id} isDark={isDark} containerClass={`relative max-w-7xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
   <Headline title={title} subtitle={subtitle} tagline={tagline} classes={classes?.headline as Record<string, string>} />
   <ItemGrid3
     items={items}
@@ -32,7 +36,7 @@ const {
       // panel:
       //   "text-center bg-page items-center md:text-left rtl:md:text-right md:items-start p-6 p-6 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-800",
       // icon: 'w-12 h-12 mb-6 text-primary',
-      title: "w-full font-thin leadding-none text-center text-[1.2rem] mt-6 px-6 py-2 bg-[#50A0BE] uppercase -translate-y-12 group-hover:translate-y-0 transition-all",
+      title: "w-full font-thin text-center text-[1.2rem] leading-none mt-6 px-6 py-2 bg-[#50A0BE] uppercase -translate-y-12 group-hover:translate-y-0 transition-all",
       description: "px-6 text-white translate-y-12 group-hover:translate-y-0 transition-all",
       content: "flex-1 opacity-0 group-hover:opacity-100 group-hover:backdrop-brightness-50 transition-all w-full",
       image: 'absolute -z-10 inset-0',

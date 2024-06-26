@@ -141,6 +141,10 @@ export interface Item {
   image?: Image;
 }
 
+export interface ClickableItem extends Item {
+  href?: string;
+}
+
 export interface Price {
   title?: string;
   subtitle?: string;

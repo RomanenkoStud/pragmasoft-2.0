@@ -1,8 +1,12 @@
 ---
-import type { ItemGrid as Props } from '~/types';
+import type { ItemGrid, ClickableItem } from '~/types';
 import Image from '~/components/common/Image.astro';
 import { twMerge } from 'tailwind-merge';
 import Button from './Button.astro';
+
+interface Props extends ItemGrid {
+  items: ClickableItem[];
+}
 
 const { items = [], columns, defaultIcon = '', classes = {} } = Astro.props;
 
@@ -33,8 +37,8 @@ const {
         containerClass
       )}
     >
-      {items.map(({ title, description, image, callToAction, classes: itemClasses = {} }) => (
-        <div class={twMerge('relative flex flex-col', panelClass, itemClasses?.panel)}>
+      {items.map(({ title, description, image, href, classes: itemClasses = {} }) => (
+        <a class={twMerge('relative flex flex-col', panelClass, itemClasses?.panel)} href={href}>
           {(image || defaultIcon) && (
             <Image src={image?.src} alt={image?.alt} class={twMerge(imageClass, itemClasses?.image)} />
           )}
@@ -43,13 +47,8 @@ const {
             {description && (
               <p class={twMerge('text-muted mt-2', descriptionClass, itemClasses?.description)} set:html={description} />
             )}
-            {callToAction && (
-              <div class="mt-2">
-                <Button {...callToAction} />
-              </div>
-            )}
           </div>
-        </div>
+        </a>
       ))}
     </div>
   )
