@@ -11,7 +11,7 @@ metadata:
   title:
     default: PragmaSoft
     template: '%s — PragmaSoft'
-  description: "\U0001F680 PragmaSoft is a team of highly qualified specialists with almost 20 years of successful software development."
+  description: "🪁 PragmaSoft is a team of highly qualified specialists with almost 20 years of successful software development."
   robots:
     index: true
     follow: true
