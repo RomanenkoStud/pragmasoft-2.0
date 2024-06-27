@@ -47,28 +47,39 @@ const optimizedArrowRight = await getImage({src: arrowRight, format: 'png'});
   function onLoad() {
     const carousels = document.querySelectorAll('[data-carousel]');
 
+    const nextSlide = (content: HTMLElement, silent = false) => {
+      let slides = [...content.querySelectorAll('[data-carousel-slide]')] as HTMLElement[];
+
+      slides.forEach((slide, index) => slide.classList.toggle('current', index === currentSlideIndex));
+      content.style.transitionProperty =  silent ? 'none' : 'transform';
+      content.style.transform = `translateX(calc(-100%*${currentSlideIndex}))`;
+    }
+
     for (const carousel of carousels) {
       const content = carousel.querySelector('[data-carousel-content]') as HTMLElement;
       const auto = (carousel as HTMLElement).hasAttribute('data-carousel-auto');
       const timeout = +((carousel as HTMLElement).dataset?.carouselTimeout ?? 0);
-      let slides = [...content.querySelectorAll('[data-carousel-slide]')] as HTMLElement[];
+      const slides = [...content.querySelectorAll('[data-carousel-slide]')] as HTMLElement[];
 
       // Clone first and last slides for seamless looping (executed once)
       const first = slides[0].cloneNode(true) as HTMLElement;
       const last = slides[slides.length - 1].cloneNode(true) as HTMLElement;
+      const length = content.querySelectorAll('[data-carousel-slide]').length + 2;
       first.classList.add('clone');
       last.classList.add('clone');
       content.prepend(last);
       content.append(first);
-      slides = [...content.querySelectorAll('[data-carousel-slide]')] as HTMLElement[];
+
+      const isOutOfRange = () => currentSlideIndex < 1 || currentSlideIndex > length - 2;
+      const reset = () => {currentSlideIndex = currentSlideIndex === 0 ? length - 2 : 1};
 
       content.style.transform = 'translateX(-100%)'; // Initial transform
 
       let intervalId: NodeJS.Timeout|null = auto ? setInterval(() => {
+        if (isOutOfRange()) { return; }
+
         currentSlideIndex++;
-        slides.forEach((slide, index) => slide.classList.toggle('current', index === currentSlideIndex));
-        content.style.transitionProperty = 'transform'; // Enable transition
-        content.style.transform = `translateX(calc(-100%*${currentSlideIndex}))`;
+        nextSlide(content);
       }, timeout) : null;
 
       const handleClick = (event: Event) => {
@@ -78,25 +89,22 @@ const optimizedArrowRight = await getImage({src: arrowRight, format: 'png'});
         }
 
         const target = event.target as HTMLElement;
+
+        if (!target.hasAttribute('data-carousel-arrow')) { return; }
+
         const direction = target.dataset.carouselArrow;
 
-        if (!direction || currentSlideIndex === 0 || currentSlideIndex === slides.length - 1) {
-          return;
-        }
+        if (isOutOfRange()) { return; }
 
         currentSlideIndex += direction === 'right' ? 1 : -1;
-
-        slides.forEach((slide, index) => slide.classList.toggle('current', index === currentSlideIndex));
-        content.style.transitionProperty = 'transform'; // Enable transition
-        content.style.transform = `translateX(calc(-100%*${currentSlideIndex}))`;
+        nextSlide(content);
       };
 
       const handleLoop = (_event: Event) => {
-        if (currentSlideIndex === 0 || currentSlideIndex === slides.length - 1) {
-          currentSlideIndex = currentSlideIndex === 0 ? slides.length - 2 : 1;
-          content.style.transitionProperty = 'none'; // Disable transition
-          content.style.transform = `translateX(calc(-100%*${currentSlideIndex}))`;
-        }
+        if (!isOutOfRange()) { return; }
+
+        reset();
+        nextSlide(content, true);
       };
 
       carousel.addEventListener('click', handleClick);
