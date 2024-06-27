@@ -19,56 +19,92 @@ const optimizedArrowLeft = await getImage({src: arrowLeft, format: 'png'});
 const optimizedArrowRight = await getImage({src: arrowRight, format: 'png'});
 
 ---
-<div class="relative hidden lg:flex top-[115px] left-[25px] w-[680px] h-[135px]"
+<div class="relative hidden text-[18px] lg:flex flex-col justify-center top-[115px] left-[25px] w-[680px]"
   style={`--pragma-arrow-left: url(${optimizedArrowLeft.src}); --pragma-arrow-right: url(${optimizedArrowRight.src});`}
-  data-carousel>
+  data-carousel data-carousel-auto data-carousel-timeout="3000">
   <div class="px-[25px] overflow-hidden">
-    {
-      testimonials &&
-        testimonials.map(({ testimonial }, index) => (
-          <div class={`flex shrink-0 h-auto w-full ${index === 0 ? 'current' : '' }`} data-carousel-slide>
-            {testimonial && (
-              <blockquote class="flex-auto">
-                <p class="text-muted">" {testimonial} "</p>
-              </blockquote>
-            )}
-          </div>
-        ))
-    }
+    <div class="flex items-center flex-nowrap w-full duration-700" data-carousel-content>
+      {
+        testimonials &&
+          testimonials.map(({ testimonial }, index) => (
+            <div class={`flex shrink-0 px-[30px] h-auto w-full ${index === 0 ? 'current' : '' }`} data-carousel-slide>
+              {testimonial && (
+                <blockquote class="flex-auto">
+                  <p class="text-muted">«{testimonial}»</p>
+                </blockquote>
+              )}
+            </div>
+          ))
+      }
+    </div>
   </div>
-  <div class="absolute top-[calc(50%-(37px/2)] w-full">
-    <div data-arrow-left class="absolute cursor-pointer left-0 w-[20px] h-[37px] [background:var(--pragma-arrow-left)_no-repeat_0_0]"></div>
-    <div data-arrow-right class="absolute cursor-pointer right-0 w-[20px] h-[37px] [background:var(--pragma-arrow-right)_no-repeat_0_0]"></div>
+  <div class="absolute top-[calc(50%-(37px/2))] w-full">
+    <div data-carousel-arrow="left" class="absolute cursor-pointer left-0 w-[20px] h-[37px] [background:var(--pragma-arrow-left)_no-repeat_0_0]"></div>
+    <div data-carousel-arrow="right" class="absolute cursor-pointer right-0 w-[20px] h-[37px] [background:var(--pragma-arrow-right)_no-repeat_0_0]"></div>
   </div>
 </div>
-<style>
-  [data-carousel-slide]:not(.current) {
-    @apply hidden;
-  }
-</style>
 <script>
-    let currentSlideIndex = 0;
+  function onLoad() {
+    const carousels = document.querySelectorAll('[data-carousel]');
 
-    const handleClick = (event: MouseEvent) => {
-      const target = event.target as HTMLElement;
-      const slides = target.closest('[data-carousel]')?.querySelectorAll('[data-carousel-slide]')
+    for (const carousel of carousels) {
+      const content = carousel.querySelector('[data-carousel-content]') as HTMLElement;
+      const auto = (carousel as HTMLElement).hasAttribute('data-carousel-auto');
+      const timeout = +((carousel as HTMLElement).dataset?.carouselTimeout ?? 0);
+      let slides = [...content.querySelectorAll('[data-carousel-slide]')] as HTMLElement[];
 
-      if(!slides) {
-        return;
-      }
+      // Clone first and last slides for seamless looping (executed once)
+      const first = slides[0].cloneNode(true) as HTMLElement;
+      const last = slides[slides.length - 1].cloneNode(true) as HTMLElement;
+      first.classList.add('clone');
+      last.classList.add('clone');
+      content.prepend(last);
+      content.append(first);
+      slides = [...content.querySelectorAll('[data-carousel-slide]')] as HTMLElement[];
 
-      if (target.hasAttribute('data-arrow-left')) {
-        currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
-      } else if (target.hasAttribute('data-arrow-right')) {
-        currentSlideIndex = (currentSlideIndex + 1) % slides.length;
-      }
+      content.style.transform = 'translateX(-100%)'; // Initial transform
 
-      slides.forEach((slide, index) => {
-        slide.classList.toggle('current', index === currentSlideIndex);
-      });
-    };
+      let intervalId: NodeJS.Timeout|null = auto ? setInterval(() => {
+        currentSlideIndex++;
+        slides.forEach((slide, index) => slide.classList.toggle('current', index === currentSlideIndex));
+        content.style.transitionProperty = 'transform'; // Enable transition
+        content.style.transform = `translateX(calc(-100%*${currentSlideIndex}))`;
+      }, timeout) : null;
 
-    [...document.querySelectorAll('[data-carousel]')].forEach((carousel) => {
-      (carousel as HTMLElement).addEventListener('click', handleClick);
-    });
+      const handleClick = (event: Event) => {
+        if(intervalId) {
+          clearInterval(intervalId); // disable auto-slide
+          intervalId = null;
+        }
+
+        const target = event.target as HTMLElement;
+        const direction = target.dataset.carouselArrow;
+
+        if (!direction || currentSlideIndex === 0 || currentSlideIndex === slides.length - 1) {
+          return;
+        }
+
+        currentSlideIndex += direction === 'right' ? 1 : -1;
+
+        slides.forEach((slide, index) => slide.classList.toggle('current', index === currentSlideIndex));
+        content.style.transitionProperty = 'transform'; // Enable transition
+        content.style.transform = `translateX(calc(-100%*${currentSlideIndex}))`;
+      };
+
+      const handleLoop = (_event: Event) => {
+        if (currentSlideIndex === 0 || currentSlideIndex === slides.length - 1) {
+          currentSlideIndex = currentSlideIndex === 0 ? slides.length - 2 : 1;
+          content.style.transitionProperty = 'none'; // Disable transition
+          content.style.transform = `translateX(calc(-100%*${currentSlideIndex}))`;
+        }
+      };
+
+      carousel.addEventListener('click', handleClick);
+      carousel.addEventListener('transitionend', handleLoop);
+    }
+
+    let currentSlideIndex = 1; // Initial slide index
+  }
+
+  document.addEventListener('astro:page-load', onLoad)
 </script>
