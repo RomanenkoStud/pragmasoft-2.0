@@ -1,0 +1,60 @@
+---
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import Image from '~/components/common/Image.astro';
+import { getImage } from "astro:assets";
+
+import backgroundImage from '~/assets/images/bg/background-2.jpg';
+
+type Props = {
+  id?: string;
+}
+
+const {
+  id,
+} = Astro.props;
+
+const optimizedBackground = await getImage({src: backgroundImage, format: 'jpg'});
+---
+
+<WidgetWrapper id={id} containerClass="">
+  <Headline classes={{
+    title: "font-thin text-white text-[40px] mb-20 text-center", 
+    container: "text-start text-[18px] md:max-w-[970px] mx-auto",
+  }}>
+    <Fragment slot="title">
+      Our team
+    </Fragment>
+  </Headline>
+  <Fragment slot="bg">
+    <div class="[background:var(--pragma-team-bg)_top_center_scroll_repeat] w-full h-full"
+      style={`--pragma-team-bg:url(${optimizedBackground.src})`}>
+    </div>    
+  </Fragment>
+  <div class="photo-container">
+    <div class="item md:row-span-2"><Image src="~/assets/images/team/1.jpg" alt=""></div>
+    <div class="item"><Image src="~/assets/images/team/2.jpg" alt=""></div>
+    <div class="item"><Image src="~/assets/images/team/3.jpg" alt=""></div>
+    <div class="item"><Image src="~/assets/images/team/4.jpg" alt=""></div>
+    <div class="item"><Image src="~/assets/images/team/5.jpg" alt=""></div>
+    <div class="item"><Image src="~/assets/images/team/6.jpg" alt=""></div>
+    <div class="item"><Image src="~/assets/images/team/7.jpg" alt=""></div>
+    <div class="item"><Image src="~/assets/images/team/8.jpg" alt=""></div>
+    <div class="item"><Image src="~/assets/images/team/9.jpg" alt=""></div>
+    <div class="item md:col-span-2"><Image src="~/assets/images/team/10.jpg" alt=""></div>
+  </div>
+</WidgetWrapper>
+<style>
+  .photo-container {
+    --photo-width: 220px;
+    @apply grid grid-cols-[repeat(2,minmax(0,var(--photo-width)))] gap-0.5 w-fit mx-auto;
+    @apply md:grid-cols-[repeat(3,minmax(0,var(--photo-width)))];
+    @apply lg:grid-cols-[repeat(4,minmax(0,var(--photo-width)))];
+  }
+  .item {
+    @apply transition-all duration-700 grayscale hover:grayscale-0 border border-white;
+  }
+  .item img {
+    @apply !aspect-square md:!aspect-auto !object-top;
+  }
+</style>

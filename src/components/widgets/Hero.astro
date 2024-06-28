@@ -3,7 +3,11 @@ import Image from '~/components/common/Image.astro';
 import Button from '~/components/ui/Button.astro';
 import Background from '~/components/ui/Background.astro';
 
-import type { Hero as Props } from '~/types';
+import type { Hero } from '~/types';
+
+interface Props extends Hero {
+  classes?: Record<string, string | Record<string, string>>;
+}
 
 const {
   title = await Astro.slots.render('title'),
@@ -16,6 +20,7 @@ const {
 
   id,
   bg = await Astro.slots.render('bg'),
+  classes = {},
 } = Astro.props;
 ---
 
@@ -27,7 +32,7 @@ const {
   </div>
   <div class="relative max-w-7xl mx-auto px-4 sm:px-6">
     <div class="pt-0 md:pt-[76px] pointer-events-none"></div>
-    <div class="py-12 md:py-20">
+    <div class={`py-12 md:py-20 ${classes?.content}`}>
       <div class="text-center pb-10 md:pb-16 max-w-5xl mx-auto">
         {
           tagline && (

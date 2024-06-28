@@ -1,5 +1,4 @@
 ---
-import { getImage } from "astro:assets";
 import Features4 from '~/components/widgets/Features4.astro';
 
 import Paralax from '~/components/custom/Paralax.astro';
@@ -8,76 +7,113 @@ import Paralax from '~/components/custom/Paralax.astro';
 import elfishki from '~/assets/images/project/mobile/elfishki.jpg';
 import iSign from '~/assets/images/project/mobile/isign.jpg';
 import mls from '~/assets/images/project/mobile/mls.jpg';
-import memeco from '~/assets/images/project/mobile/momeco.jpg';
+import storelocator from '~/assets/images/project/mobile/storelocator-logo.png';
 import coloringBook from '~/assets/images/project/mobile/story.jpg';
 import vyke from '~/assets/images/project/mobile/vike.jpg';
 import wlcome from '~/assets/images/project/mobile/wlcome.jpg';
 import emailManager from '~/assets/images/project/mobile/email.jpg';
+import faceRecognizer from '~/assets/images/project/mobile/fr_logo.png';
+import trakit from '~/assets/images/project/mobile/trak_logo.png';
+import careInnovations from '~/assets/images/project/mobile/cilogo.png';
+import ticketGretchen from '~/assets/images/project/cloud/Mobile-Ticketing.jpg';
+import voyages from '~/assets/images/project/mobile/v_logo.png';
 
-const optimizedElfishki = await getImage({src: elfishki, format: 'jpg'});
-const optimizediSign = await getImage({src: iSign, format: 'jpg'});
-const optimizedMls = await getImage({src: mls, format: 'jpg'});
-const optimizedMemeco = await getImage({src: memeco, format: 'jpg'});
-const optimizedcoloringBook = await getImage({src: coloringBook, format: 'jpg'});
-const optimizedVyke = await getImage({src: vyke, format: 'jpg'});
-const optimizedWlcome = await getImage({src: wlcome, format: 'jpg'});
-const optimizedEmailManager = await getImage({src: emailManager, format: 'jpg'});
+import paralax1 from '~/assets/images/paralax/bg-piramid.png';
+import paralax2 from '~/assets/images/paralax/tr-bl3-col-left.png';
+import paralax3 from '~/assets/images/paralax/tr-bl3-fon-left.png';
+import paralax4 from '~/assets/images/paralax/tr-bl3-w-left-bg.png';
+import paralax5 from '~/assets/images/paralax/tr-bl3-col-right.png';
+import paralax6 from '~/assets/images/paralax/tr-bl3-fon-right.png';
+import paralax7 from '~/assets/images/paralax/tr-bl3-w-right-bg.png';
+
+type Props = {
+  id?: string;
+}
+
+const {
+  id,
+} = Astro.props;
 ---
 
-<div class="paralax-container">
+<div class="paralax-container" id={id}>
   <Features4
     id="mobile-app-development"
-    title="MOBILE APP DEVELOPMENT"
+    title="Mobile App<br />Development"
     classes={{
       container: "bg-[#81CDDB] max-w-full", 
       headline: {
         title: "font-thin text-[40px] mb-20 text-center", 
-        container: "text-start text-[18px] md:w-[970px] mx-auto",
+        container: "text-start text-[18px] md:max-w-[970px] mx-auto",
       },
       items: {
-        container: "paralax-items text-[18px] mt-[105px] mb-[70px] md:w-[970px] mx-auto"
+        container: "paralax-items text-[18px] mt-[105px] mb-[70px] md:w-[970px] mx-auto justify-items-center place-content-center"
       }
     }}
     columns={4}
     items={[{
       title: 'Elfishki',
       description: "Network Reachability, Core Graphics Framework",
-      image: {src: optimizedElfishki.src, alt: "Elfishki"},
+      image: {...elfishki, alt: "Elfishki"},
       href: '#',
     },{
       title: 'iSIgn',
       description: "Network Reachability, Core Graphics Framework",
-      image: {src: optimizediSign.src, alt: "iSIgn"},
+      image: {...iSign, alt: "iSIgn"},
       href: '#',
     },{
       title: 'MLS',
       description: "JavaEE, Spring, Hibernate, JavaME, C++, ATL, WTL, MFC",
-      image: {src: optimizedMls.src, alt: "MLS"},
+      image: {...mls, alt: "MLS"},
       href: '#',
     },{
-      title: 'Memeco',
-      description: "Design, iPhone, icon design, HTML, CSS, Blackberry, Nokia",
-      image: {src: optimizedMemeco.src, alt: "Memeco"},
+      title: 'Storelocator',
+      description: "Apache Cordova/PhoneGap, jQuery mobile, Facebook and Google OAuth 2.0",
+      image: {...storelocator, alt: "Storelocator"},
       href: '#',
     },{
-      title: 'COLORING BOOK APP',
+      title: 'Magic Children’s Coloring Books',
       description: "Facebook API, Media Player Framework",
-      image: {src: optimizedcoloringBook.src, alt: "COLORING BOOK APP"},
+      image: {...coloringBook, alt: "Magic Children’s Coloring Books"},
       href: '#',
     },{
       title: 'Vyke',
       description: "AndroidSDK",
-      image: {src: optimizedVyke.src, alt: "Vyke"},
+      image: {...vyke, alt: "Vyke"},
       href: '#',
     },{
       title: 'Wlcome',
       description: "J2EE (EJB 3.0, JPA, JAX-RS), Arquillian for testing",
-      image: {src: optimizedWlcome.src, alt: "Wlcome"},
+      image: {...wlcome, alt: "Wlcome"},
       href: '#',
     },{
       title: 'EMAIL MANAGER',
       description: "UIKit, Custom Table View Control, Async Web Requests",
-      image: {src: optimizedEmailManager.src, alt: "EMAIL MANAGER"},
+      image: {...emailManager, alt: "EMAIL MANAGER"},
+      href: '#',
+    },{
+      title: 'FACE RECOGNIZER',
+      description: "OpenCV",
+      image: {...faceRecognizer, alt: "FACE RECOGNIZER"},
+      href: '#',
+    },{
+      title: 'TRAKIT',
+      description: "OpenEars, Tesseract OCR, REST API, Network Reachability, Async Web Requests",
+      image: {...trakit, alt: "TRAKIT"},
+      href: '#',
+    },{
+      title: 'Care Innovations',
+      description: "Google PlayStore SDK, Google API Client Library for Java, Android SDK",
+      image: {...careInnovations, alt: "Care Innovations"},
+      href: '#',
+    },{
+      title: 'Ticket Gretchen',
+      description: "JavaEE6, AWS, DynamoDB, JPA, EJB3, Cordova",
+      image: {...ticketGretchen, alt: "Ticket Gretchen"},
+      href: '#',
+    },{
+      title: 'VOYAGES',
+      description: "GPS, maps, geocodes, json, restful api, core data, async networking",
+      image: {...voyages, alt: "VOYAGES"},
       href: '#',
     },]}
     >
@@ -95,5 +131,27 @@ const optimizedEmailManager = await getImage({src: emailManager, format: 'jpg'})
       </ul>
     </Fragment>
   </Features4>
-  <Paralax/>
+  <Paralax>
+    <div class="top-[840px] z-[9] h-[1000px] [background:var(--pragma-paralax-1)_0_0_repeat]" data-velocity="-.1"
+      style={`--pragma-paralax-1:url(${paralax1.src})`}
+    ></div>
+    <div class="top-[700px] z-[12] h-[800px] [background:var(--pragma-paralax-2)_top_center_no-repeat]" data-velocity="-.5"
+      style={`--pragma-paralax-2:url(${paralax2.src})`}
+    ></div>
+    <div class="top-[900px] z-[11] h-[800px] [background:var(--pragma-paralax-3)_top_center_no-repeat]" data-velocity="-.7"
+      style={`--pragma-paralax-3:url(${paralax3.src})`}
+    ></div>
+    <div class="top-[800px] z-[10] h-[800px] [background:var(--pragma-paralax-4)_top_center_no-repeat]" data-velocity="-.9"
+      style={`--pragma-paralax-4:url(${paralax4.src})`}
+    ></div>
+    <div class="top-[550px] z-[15] h-[800px] [background:var(--pragma-paralax-5)_top_center_no-repeat]" data-velocity="-.5"
+      style={`--pragma-paralax-5:url(${paralax5.src})`}
+    ></div>
+    <div class="top-[850px] z-[14] h-[800px] [background:var(--pragma-paralax-6)_top_center_no-repeat]" data-velocity="-.7"
+      style={`--pragma-paralax-6:url(${paralax6.src})`}
+    ></div>
+    <div class="top-[600px] z-[13] h-[800px] [background:var(--pragma-paralax-7)_top_center_no-repeat]" data-velocity="-.9"
+      style={`--pragma-paralax-7:url(${paralax7.src})`}
+    ></div>
+  </Paralax>
 </div>

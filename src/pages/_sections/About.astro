@@ -1,9 +1,17 @@
 ---
 import Stats2 from '~/components/widgets/Stats2.astro';
 import WhatWeOffer from '~/components/widgets/WhatWeOffer.astro';
+
+type Props = {
+  id?: string;
+}
+
+const {
+  id,
+} = Astro.props;
 ---
 
-<Fragment>
+<div class="w-full bg-[#31cbaa]" id={id}>
   <Stats2
     stats={[
       { amount: '10', title: 'years of successful software development' },
@@ -12,6 +20,6 @@ import WhatWeOffer from '~/components/widgets/WhatWeOffer.astro';
       { amount: '1000+', title: 'positive feedbacks from our customers' },
     ]}
   />
-  <WhatWeOffer classes={{container: "-mt-[72px]"}}/>
+  <WhatWeOffer/>
   </div>      
-</Fragment>
+</div>

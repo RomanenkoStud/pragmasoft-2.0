@@ -4,16 +4,22 @@ import Layout from '~/layouts/PageLayout.astro';
 import Hero from './_sections/Hero.astro';
 import About from './_sections/About.astro';
 import MobileAppDev from './_sections/MobileAppDev.astro';
+import JavaServerApp from './_sections/JavaServerApp.astro';
+import Team from './_sections/Team.astro';
+import Quality from './_sections/Quality.astro';
 ---
 
 <Layout>
   <Hero/>
 
-  <div class="w-full bg-[#31cbaa]" id="about">
-    <About/>
-  </div>
+  <About id="about"/>
 
   <div id="projects">
     <MobileAppDev />
+    <JavaServerApp />
   </div>
+
+  <Team id="team"/>
+
+  <Quality id="quality"/>
 </Layout>

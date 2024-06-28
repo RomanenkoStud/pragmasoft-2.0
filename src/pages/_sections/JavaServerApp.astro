@@ -1,0 +1,159 @@
+---
+import Features4 from '~/components/widgets/Features4.astro';
+
+import Paralax from '~/components/custom/Paralax.astro';
+
+
+import affordx from '~/assets/images/project/java/affordx.jpg';
+import handpoint from '~/assets/images/project/java/handpoint.jpg';
+import rxgo from '~/assets/images/project/java/rxgo.png';
+import vykeDash from '~/assets/images/project/java/vyke-dash.jpg';
+import fna from '~/assets/images/project/java/fna-logo.jpg';
+import vykeCom from '~/assets/images/project/java/vyke-j.jpg';
+import orderProject from '~/assets/images/project/free-project2.jpg';
+import prinly from '~/assets/images/project/java/prinly.jpg';
+import highestcockpit from '~/assets/images/project/java/HIGHESTcockpit_icon.jpg';
+import openemm from '~/assets/images/project/java/openemm_logo.png';
+import acai from '~/assets/images/project/design/acai_ico.png';
+import echoTracking from '~/assets/images/project/java/Echo_tracking_logo.png';
+import zpc from '~/assets/images/project/java/zpc.png';
+
+import paralax1 from '~/assets/images/paralax/bg-piramid.png';
+import paralax2 from '~/assets/images/paralax/tr-bl4-col-left.png';
+import paralax3 from '~/assets/images/paralax/tr-bl4-fon-left.png';
+import paralax4 from '~/assets/images/paralax/tr-bl3-w-left-bg.png';
+import paralax5 from '~/assets/images/paralax/tr-bl4-col-right.png';
+import paralax6 from '~/assets/images/paralax/tr-bl4-fon-right.png';
+import paralax7 from '~/assets/images/paralax/tr-bl3-w-right-bg.png';
+
+type Props = {
+  id?: string;
+}
+
+const {
+  id,
+} = Astro.props;
+---
+
+<div class="paralax-container" id={id}>
+  <Features4
+    id="mobile-app-development"
+    title="Java Server applications"
+    classes={{
+      container: "bg-[#FFB700] max-w-full", 
+      headline: {
+        title: "font-thin text-[40px] mb-20 text-center", 
+        container: "text-start text-[18px] md:max-w-[970px] mx-auto",
+      },
+      items: {
+        container: "paralax-items text-[18px] mt-[105px] mb-[70px] md:w-[970px] mx-auto"
+      }
+    }}
+    columns={4}
+    items={[{
+      title: 'Affordx',
+      description: "JavaEE, RestEASY, HTMLEasy, MySQL, Hibernate, Jboss7",
+      image: {...affordx, alt: "Affordx"},
+      href: '#',
+    },{
+      title: 'Handpoint',
+      description: "AndroidSDK",
+      image: {...handpoint, alt: "Handpoint"},
+      href: '#',
+    },{
+      title: 'Prescription Discount Card (RXGO)',
+      description: "JavaEE, Widfly Swarm, AWS Elastic Beanstalk, Docker, Hibernate",
+      image: {...rxgo, alt: "RXGO"},
+      href: '#',
+    },{
+      title: 'VYKE Dashboard',
+      description: "JavaEE, JSF, RichFaces, AJAX4JSF, SIFR, Facelets",
+      image: {...vykeDash, alt: "VYKE Dashboard"},
+      href: '#',
+    },{
+      title: 'FNA',
+      description: "JD3.JS, SVG, Require JS, Grunt, LESS, Bootstrap, MVVM architecture",
+      image: {...fna, alt: "FNA"},
+      href: '#',
+    },{
+      title: 'Vyke Communications',
+      description: "JavaEE, Spring, Hibernate, JSF, AJAX (Richfaces)",
+      image: {...vykeCom, alt: "Vyke Communications"},
+      href: '#',
+    },{
+      title: 'Order a Project',
+      description: "JavaEE, Spring, Hibernate, JavaME, C++, ATL, WTL, MFC",
+      image: {...orderProject, alt: "Order a Project"},
+      href: '#',
+    },{
+      title: 'Prinly',
+      description: "Adobe Flex, Java, JavaScript, REST, Spring, Hibernate, Apache Click",
+      image: {...prinly, alt: "Prinly"},
+      href: '#',
+    },{
+      title: 'Highestcockpit',
+      description: "ReactJS, Gupl, SASS, Spring, SpringData, SpringBoot, JHipster",
+      image: {...highestcockpit, alt: "Highestcockpit"},
+      href: '#',
+    },{
+      title: 'OpenEMM',
+      description: "Java, JavaMail, Spring, Spring-WS, Struts, JDBC, MySQL, Oracle, Ehcache",
+      image: {...openemm, alt: "OpenEMM"},
+      href: '#',
+    },{
+      title: 'ACAI AUTHOR',
+      description: "Bootstrap, Spring, Tiles, JQuery, MarkItUp!, DZSlides",
+      image: {...acai, alt: "ACAI AUTHOR"},
+      href: '#',
+    },{
+      title: 'Echo Tracking',
+      description: "Neo4j, Javascript, Google Maps API",
+      image: {...echoTracking, alt: "Echo Tracking"},
+      href: '#',
+    },{
+      title: 'Z. P. C.',
+      description: "Rubix, React JS",
+      image: {...zpc, alt: "Z. P. C."},
+      href: '#',
+    },]}
+    >
+    <Fragment slot="subtitle">
+      <p class="uppercase">Advantages of Server application</p>
+      <p>Server applications have a number of advantages:</p>
+      <ul class="list-disc">
+        <li>The integrity of the data and code. With business logic on a single server, you can guarantee updating and improvement applications for all users. There is no risk that the old version of the application can access data or could to change them old inconsistent manner.</li>
+        <li>Safety. The application server is the central point that allows you to remove the responsibility from potentially unsafe client level to the application server level, optionally hiding the database level.</li>
+        <li>Centralized configuration and management. Any changes in the application settings can be performed centrally.</li>
+        <li>Transaction support. Possibility to reduce cost and time for development.</li>
+      </ul>
+      <br /><br />
+
+      <p class="uppercase">What we offer</p>
+      <p>Server-side/client-side high quality Java applications.<br />
+Pragmasoft Team has a great experience in server application development. Our experience along with the latest technologies and individual approach to each Сlient will provide you with a reliable partner that can meet your requirements and realize the most challenging ideas.</p>
+    </Fragment>
+  </Features4>
+  <Paralax>
+    <div class="top-[840px] z-[9] h-[1000px] [background:var(--pragma-paralax-1)_0_0_repeat]" data-velocity="-.1"
+      style={`--pragma-paralax-1:url(${paralax1.src})`}
+    ></div>
+    <div class="top-[700px] z-[12] h-[800px] [background:var(--pragma-paralax-2)_top_center_no-repeat]" data-velocity="-.5"
+      style={`--pragma-paralax-2:url(${paralax2.src})`}
+    ></div>
+    <div class="top-[900px] z-[11] h-[800px] [background:var(--pragma-paralax-3)_top_center_no-repeat]" data-velocity="-.7"
+      style={`--pragma-paralax-3:url(${paralax3.src})`}
+    ></div>
+    <div class="top-[800px] z-[10] h-[800px] [background:var(--pragma-paralax-4)_top_center_no-repeat]" data-velocity="-.9"
+      style={`--pragma-paralax-4:url(${paralax4.src})`}
+    ></div>
+    <div class="top-[550px] z-[15] h-[800px] [background:var(--pragma-paralax-5)_top_center_no-repeat]" data-velocity="-.5"
+      style={`--pragma-paralax-5:url(${paralax5.src})`}
+    ></div>
+    <div class="top-[850px] z-[14] h-[800px] [background:var(--pragma-paralax-6)_top_center_no-repeat]" data-velocity="-.7"
+      style={`--pragma-paralax-6:url(${paralax6.src})`}
+    ></div>
+    <div class="top-[600px] z-[13] h-[800px] [background:var(--pragma-paralax-7)_top_center_no-repeat]" data-velocity="-.9"
+      style={`--pragma-paralax-7:url(${paralax7.src})`}
+    ></div>
+  </Paralax>
+</div>

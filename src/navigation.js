@@ -15,6 +15,10 @@ export const headerData = {
       href: '#team',
     },
     {
+      text: 'Quality',
+      href: '#quality',
+    },
+    {
       text: 'Vacancies',
       href: '#vacancies',
     },

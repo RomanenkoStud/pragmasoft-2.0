@@ -41,7 +41,7 @@ import { UI } from 'astrowind:config';
   }
 
   function initActiveLink() {
-    const sections = document.querySelectorAll('#about, #projects'); 
+    const sections = document.querySelectorAll('#about, #projects, #team, #quality'); 
     let currentActiveSection;
 
     const updateActiveSection = () => {
@@ -52,9 +52,9 @@ import { UI } from 'astrowind:config';
         const isPartiallyAbove = rect.top <= windowHeight && rect.top + section.offsetHeight > 0;
 
         const isVisible = isPartiallyAbove;
-        const intersectionRatio = Math.min(rect.height, windowHeight) / section.offsetHeight;
+        const intersection = Math.min(rect.height, windowHeight) - windowHeight/2;
 
-        const isActive = isVisible && intersectionRatio >= 0.5;
+        const isActive = isVisible && intersection > 0;
 
         if (isActive && section.id !== currentActiveSection) {
           const matchingLink = document.querySelector(`a[href="#${section.id}"]`);

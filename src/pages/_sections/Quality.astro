@@ -1,0 +1,40 @@
+---
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import { getImage } from "astro:assets";
+
+import backgroundImage from '~/assets/images/bg/background.jpg';
+
+type Props = {
+  id?: string;
+}
+
+const {
+  id,
+} = Astro.props;
+
+const optimizedBackground = await getImage({src: backgroundImage, format: 'jpg'});
+---
+
+<WidgetWrapper id={id} containerClass="">
+  <Headline classes={{
+    title: "font-thin text-[40px] mb-20 text-center", 
+    container: "text-start text-[18px] md:max-w-[970px] mx-auto",
+  }}>
+    <Fragment slot="title">
+      Software Quality<br />Assurance
+    </Fragment>
+    <Fragment slot="subtitle">
+      <p>We put serious attention to quality of our product. We have dedicated QA department, and fair number of devices available for testing, including smart-phones and tablets (IOS, Android, Blackberry and Win Phone powered).</p><br />
+      <p>Our team has wide software testing experience from  simple applications to complicated cross-functional ones to offer our Clients the best software quality assurance services.</p>
+    </Fragment>
+  </Headline>
+  <Fragment slot="bg">
+    <div class="[background:var(--pragma-team-bg)_top_center_scroll_repeat] w-full h-full"
+      style={`--pragma-team-bg:url(${optimizedBackground.src})`}>
+    </div>    
+  </Fragment>
+</WidgetWrapper>
+<style>
+
+</style>
