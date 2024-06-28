@@ -1,13 +1,62 @@
 ---
-import type { Widget as Props } from '~/types';
+import type { Widget } from '~/types';
+import paralax1 from '~/assets/images/paralax/bg-piramid.png';
+import paralax2 from '~/assets/images/paralax/tr-bl3-col-left.png';
+import paralax3 from '~/assets/images/paralax/tr-bl3-fon-left.png';
+import paralax4 from '~/assets/images/paralax/tr-bl3-w-left-bg.png';
+import paralax5 from '~/assets/images/paralax/tr-bl3-col-right.png';
+import paralax6 from '~/assets/images/paralax/tr-bl3-fon-right.png';
+import paralax7 from '~/assets/images/paralax/tr-bl3-w-right-bg.png';
+
+import paralax22 from '~/assets/images/paralax/tr-bl4-col-left.png';
+import paralax23 from '~/assets/images/paralax/tr-bl4-fon-left.png';
+import paralax25 from '~/assets/images/paralax/tr-bl4-col-right.png';
+import paralax26 from '~/assets/images/paralax/tr-bl4-fon-right.png';
+
+interface Props extends Widget {
+  variant?: 'sky'|'orange'|'custom'; //'red'|'blue'
+}
 
 const {
   classes = {},
+  variant = 'sky',
 } = Astro.props;
+
+const variants = {
+  'sky': [paralax1, paralax2, paralax3, paralax4, paralax5, paralax6, paralax7],
+  'orange': [paralax1, paralax22, paralax23, paralax4, paralax25, paralax26, paralax7],
+}
+const current = variant !== 'custom' ? variants[variant] : [];
 ---
 
-<div class="parallax">
-  <slot />
+<div class="parallax hidden md:block">
+  {
+    variant !== 'custom' ? (
+      <Fragment>
+        <div class="top-[840px] z-[9] h-[1000px] [background:var(--pragma-paralax-1)_0_0_repeat]" data-velocity="-.1"
+          style={`--pragma-paralax-1:url(${current[0].src})`}
+        ></div>
+        <div class="top-[700px] z-[12] h-[800px] [background:var(--pragma-paralax-2)_top_center_no-repeat]" data-velocity="-.5"
+          style={`--pragma-paralax-2:url(${current[1].src})`}
+        ></div>
+        <div class="top-[900px] z-[11] h-[800px] [background:var(--pragma-paralax-3)_top_center_no-repeat]" data-velocity="-.7"
+          style={`--pragma-paralax-3:url(${current[2].src})`}
+        ></div>
+        <div class="top-[800px] z-[10] h-[800px] [background:var(--pragma-paralax-4)_top_center_no-repeat]" data-velocity="-.9"
+          style={`--pragma-paralax-4:url(${current[3].src})`}
+        ></div>
+        <div class="top-[550px] z-[15] h-[800px] [background:var(--pragma-paralax-5)_top_center_no-repeat]" data-velocity="-.5"
+          style={`--pragma-paralax-5:url(${current[4].src})`}
+        ></div>
+        <div class="top-[850px] z-[14] h-[800px] [background:var(--pragma-paralax-6)_top_center_no-repeat]" data-velocity="-.7"
+          style={`--pragma-paralax-6:url(${current[5].src})`}
+        ></div>
+        <div class="top-[600px] z-[13] h-[800px] [background:var(--pragma-paralax-7)_top_center_no-repeat]" data-velocity="-.9"
+          style={`--pragma-paralax-7:url(${current[6].src})`}
+        ></div>
+      </Fragment>
+    ) : (<slot />)
+  }
 </div>
 <style is:global>
   .paralax-container {
