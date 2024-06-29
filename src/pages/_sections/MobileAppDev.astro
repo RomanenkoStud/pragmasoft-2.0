@@ -1,30 +1,9 @@
 ---
+import { getProjectFeatures } from '~/utils/projects';
 import Features4 from '~/components/widgets/Features4.astro';
-
 import Paralax from '~/components/custom/Paralax.astro';
 
-
-import elfishki from '~/assets/images/project/mobile/elfishki.jpg';
-import iSign from '~/assets/images/project/mobile/isign.jpg';
-import mls from '~/assets/images/project/mobile/mls.jpg';
-import storelocator from '~/assets/images/project/mobile/storelocator-logo.png';
-import coloringBook from '~/assets/images/project/mobile/story.jpg';
-import vyke from '~/assets/images/project/mobile/vike.jpg';
-import wlcome from '~/assets/images/project/mobile/wlcome.jpg';
-import emailManager from '~/assets/images/project/mobile/email.jpg';
-import faceRecognizer from '~/assets/images/project/mobile/fr_logo.png';
-import trakit from '~/assets/images/project/mobile/trak_logo.png';
-import careInnovations from '~/assets/images/project/mobile/cilogo.png';
-import ticketGretchen from '~/assets/images/project/cloud/Mobile-Ticketing.jpg';
-import voyages from '~/assets/images/project/mobile/v_logo.png';
-
-import paralax1 from '~/assets/images/paralax/bg-piramid.png';
-import paralax2 from '~/assets/images/paralax/tr-bl3-col-left.png';
-import paralax3 from '~/assets/images/paralax/tr-bl3-fon-left.png';
-import paralax4 from '~/assets/images/paralax/tr-bl3-w-left-bg.png';
-import paralax5 from '~/assets/images/paralax/tr-bl3-col-right.png';
-import paralax6 from '~/assets/images/paralax/tr-bl3-fon-right.png';
-import paralax7 from '~/assets/images/paralax/tr-bl3-w-right-bg.png';
+const mobileProjects = await getProjectFeatures('mobile');
 
 type Props = {
   id?: string;
@@ -50,72 +29,7 @@ const {
       }
     }}
     columns={4}
-    items={[{
-      title: 'Elfishki',
-      description: "Network Reachability, Core Graphics Framework",
-      image: {...elfishki, alt: "Elfishki"},
-      href: '#',
-    },{
-      title: 'iSIgn',
-      description: "Network Reachability, Core Graphics Framework",
-      image: {...iSign, alt: "iSIgn"},
-      href: '#',
-    },{
-      title: 'MLS',
-      description: "JavaEE, Spring, Hibernate, JavaME, C++, ATL, WTL, MFC",
-      image: {...mls, alt: "MLS"},
-      href: '#',
-    },{
-      title: 'Storelocator',
-      description: "Apache Cordova/PhoneGap, jQuery mobile, Facebook and Google OAuth 2.0",
-      image: {...storelocator, alt: "Storelocator"},
-      href: '#',
-    },{
-      title: 'Magic Children’s Coloring Books',
-      description: "Facebook API, Media Player Framework",
-      image: {...coloringBook, alt: "Magic Children’s Coloring Books"},
-      href: '#',
-    },{
-      title: 'Vyke',
-      description: "AndroidSDK",
-      image: {...vyke, alt: "Vyke"},
-      href: '#',
-    },{
-      title: 'Wlcome',
-      description: "J2EE (EJB 3.0, JPA, JAX-RS), Arquillian for testing",
-      image: {...wlcome, alt: "Wlcome"},
-      href: '#',
-    },{
-      title: 'EMAIL MANAGER',
-      description: "UIKit, Custom Table View Control, Async Web Requests",
-      image: {...emailManager, alt: "EMAIL MANAGER"},
-      href: '#',
-    },{
-      title: 'FACE RECOGNIZER',
-      description: "OpenCV",
-      image: {...faceRecognizer, alt: "FACE RECOGNIZER"},
-      href: '#',
-    },{
-      title: 'TRAKIT',
-      description: "OpenEars, Tesseract OCR, REST API, Network Reachability, Async Web Requests",
-      image: {...trakit, alt: "TRAKIT"},
-      href: '#',
-    },{
-      title: 'Care Innovations',
-      description: "Google PlayStore SDK, Google API Client Library for Java, Android SDK",
-      image: {...careInnovations, alt: "Care Innovations"},
-      href: '#',
-    },{
-      title: 'Ticket Gretchen',
-      description: "JavaEE6, AWS, DynamoDB, JPA, EJB3, Cordova",
-      image: {...ticketGretchen, alt: "Ticket Gretchen"},
-      href: '#',
-    },{
-      title: 'VOYAGES',
-      description: "GPS, maps, geocodes, json, restful api, core data, async networking",
-      image: {...voyages, alt: "VOYAGES"},
-      href: '#',
-    },]}
+    items={mobileProjects}
     >
     <Fragment slot="subtitle">
       <p>In today's world, phones have long ceased to be a communication means only. They enable us to be in touch with our near and dear ones, to stay tuned, to kill time in queues,to stay in social networks for hours  or to play applications. We keep so much information in our phones that can hardly imagine life without them. Precisely these needs created a great space for mobile developers.</p>

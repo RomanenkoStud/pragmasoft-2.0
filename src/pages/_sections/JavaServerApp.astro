@@ -1,20 +1,9 @@
 ---
+import { getProjectFeatures } from '~/utils/projects';
 import Features4 from '~/components/widgets/Features4.astro';
 import Paralax from '~/components/custom/Paralax.astro';
 
-import affordx from '~/assets/images/project/java/affordx.jpg';
-import handpoint from '~/assets/images/project/java/handpoint.jpg';
-import rxgo from '~/assets/images/project/java/rxgo.png';
-import vykeDash from '~/assets/images/project/java/vyke-dash.jpg';
-import fna from '~/assets/images/project/java/fna-logo.jpg';
-import vykeCom from '~/assets/images/project/java/vyke-j.jpg';
-import orderProject from '~/assets/images/project/free-project2.jpg';
-import prinly from '~/assets/images/project/java/prinly.jpg';
-import highestcockpit from '~/assets/images/project/java/HIGHESTcockpit_icon.jpg';
-import openemm from '~/assets/images/project/java/openemm_logo.png';
-import acai from '~/assets/images/project/design/acai_ico.png';
-import echoTracking from '~/assets/images/project/java/Echo_tracking_logo.png';
-import zpc from '~/assets/images/project/java/zpc.png';
+const javaProjects = await getProjectFeatures('java');
 
 type Props = {
   id?: string;
@@ -40,72 +29,7 @@ const {
       }
     }}
     columns={4}
-    items={[{
-      title: 'Affordx',
-      description: "JavaEE, RestEASY, HTMLEasy, MySQL, Hibernate, Jboss7",
-      image: {...affordx, alt: "Affordx"},
-      href: '#',
-    },{
-      title: 'Handpoint',
-      description: "AndroidSDK",
-      image: {...handpoint, alt: "Handpoint"},
-      href: '#',
-    },{
-      title: 'Prescription Discount Card (RXGO)',
-      description: "JavaEE, Widfly Swarm, AWS Elastic Beanstalk, Docker, Hibernate",
-      image: {...rxgo, alt: "RXGO"},
-      href: '#',
-    },{
-      title: 'VYKE Dashboard',
-      description: "JavaEE, JSF, RichFaces, AJAX4JSF, SIFR, Facelets",
-      image: {...vykeDash, alt: "VYKE Dashboard"},
-      href: '#',
-    },{
-      title: 'FNA',
-      description: "JD3.JS, SVG, Require JS, Grunt, LESS, Bootstrap, MVVM architecture",
-      image: {...fna, alt: "FNA"},
-      href: '#',
-    },{
-      title: 'Vyke Communications',
-      description: "JavaEE, Spring, Hibernate, JSF, AJAX (Richfaces)",
-      image: {...vykeCom, alt: "Vyke Communications"},
-      href: '#',
-    },{
-      title: 'Order a Project',
-      description: "JavaEE, Spring, Hibernate, JavaME, C++, ATL, WTL, MFC",
-      image: {...orderProject, alt: "Order a Project"},
-      href: '#',
-    },{
-      title: 'Prinly',
-      description: "Adobe Flex, Java, JavaScript, REST, Spring, Hibernate, Apache Click",
-      image: {...prinly, alt: "Prinly"},
-      href: '#',
-    },{
-      title: 'Highestcockpit',
-      description: "ReactJS, Gupl, SASS, Spring, SpringData, SpringBoot, JHipster",
-      image: {...highestcockpit, alt: "Highestcockpit"},
-      href: '#',
-    },{
-      title: 'OpenEMM',
-      description: "Java, JavaMail, Spring, Spring-WS, Struts, JDBC, MySQL, Oracle, Ehcache",
-      image: {...openemm, alt: "OpenEMM"},
-      href: '#',
-    },{
-      title: 'ACAI AUTHOR',
-      description: "Bootstrap, Spring, Tiles, JQuery, MarkItUp!, DZSlides",
-      image: {...acai, alt: "ACAI AUTHOR"},
-      href: '#',
-    },{
-      title: 'Echo Tracking',
-      description: "Neo4j, Javascript, Google Maps API",
-      image: {...echoTracking, alt: "Echo Tracking"},
-      href: '#',
-    },{
-      title: 'Z. P. C.',
-      description: "Rubix, React JS",
-      image: {...zpc, alt: "Z. P. C."},
-      href: '#',
-    },]}
+    items={javaProjects}
     >
     <Fragment slot="subtitle">
       <p class="uppercase">Advantages of Server application</p>

@@ -63,6 +63,19 @@ const postCollection = defineCollection({
   }),
 });
 
+const projectsCollection = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    image: z.object({
+      src: z.string(),
+      alt: z.string(),
+    }),
+    href: z.string().optional(),
+    technologies: z.array(z.string().optional()),
+  })
+});
+
 export const collections = {
   post: postCollection,
+  projects: projectsCollection,
 };
