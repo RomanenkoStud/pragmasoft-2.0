@@ -1,7 +1,7 @@
 site:
   name: Pragmasoft
   site: 'https://pragmasoft.com.ua'
-  base: '/'
+  base: '/pragmasoft-2.0/'
   trailingSlash: false
 
   googleSiteVerificationId: orcPxI47GSa-cRvY11tUe6iGg2IO_RPvnA1q95iEM3M
