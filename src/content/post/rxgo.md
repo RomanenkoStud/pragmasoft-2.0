@@ -1,10 +1,8 @@
 ---
 title: Prescription Discount Card (RXGO)
-image:
-  src: ~/assets/images/project/java/rxgo.png
-  alt: RXGO
-href: '#'
-technologies:
+image: ~/assets/images/project/java/rxgo.png
+category: java
+tags:
   - JavaEE
   - Widfly Swarm
   - AWS Elastic Beanstalk

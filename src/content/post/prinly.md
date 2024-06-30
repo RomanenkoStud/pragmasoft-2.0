@@ -1,10 +1,8 @@
 ---
 title: Prinly
-image:
-  src: ~/assets/images/project/java/prinly.jpg
-  alt: Prinly
-href: '#'
-technologies:
+image: ~/assets/images/project/java/prinly.jpg
+category: java
+tags:
   - Adobe Flex
   - Java
   - JavaScript

@@ -1,10 +1,8 @@
 ---
 title: VOYAGES
-image: 
-  src: ~/assets/images/project/mobile/v_logo.png
-  alt: VOYAGES
-href: '#'
-technologies:
+image: ~/assets/images/project/mobile/v_logo.png
+category: mobile
+tags:
   - GPS
   - maps
   - geocodes

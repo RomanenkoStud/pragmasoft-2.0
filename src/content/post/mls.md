@@ -1,10 +1,8 @@
 ---
 title: MLS
-image: 
-  src: ~/assets/images/project/mobile/mls.jpg
-  alt: MLS
-href: '#'
-technologies:
+image: ~/assets/images/project/mobile/mls.jpg
+category: mobile
+tags:
   - JavaEE
   - Spring
   - Hibernate

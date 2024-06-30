@@ -1,10 +1,8 @@
 ---
 title: Care Innovations
-image: 
-  src: ~/assets/images/project/mobile/cilogo.png
-  alt: Care Innovations
-href: '#'
-technologies:
+image: ~/assets/images/project/mobile/cilogo.png
+category: mobile
+tags:
   - Google PlayStore SDK
   - Google API Client Library for Java
   - Android SDK

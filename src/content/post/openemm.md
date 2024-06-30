@@ -1,10 +1,8 @@
 ---
 title: OpenEMM
-image:
-  src: ~/assets/images/project/java/openemm_logo.png
-  alt: OpenEMM
-href: '#'
-technologies:
+image: ~/assets/images/project/java/openemm_logo.png
+category: java
+tags:
   - Java
   - JavaMail
   - Spring

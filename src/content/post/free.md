@@ -1,10 +1,8 @@
 ---
 title: Order a Project
-image:
-  src: ~/assets/images/project/free-project2.jpg
-  alt: Order a Project
-href: '#'
-technologies:
+image: ~/assets/images/project/free-project2.jpg
+category: java
+tags:
   - JavaEE
   - Spring
   - Hibernate

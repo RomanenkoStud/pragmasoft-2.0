@@ -1,10 +1,8 @@
 ---
 title: TRAKIT
-image: 
-  src: ~/assets/images/project/mobile/trak_logo.png
-  alt: TRAKIT
-href: '#'
-technologies:
+image: ~/assets/images/project/mobile/trak_logo.png
+category: mobile
+tags:
   - OpenEars
   - Tesseract OCR
   - REST API

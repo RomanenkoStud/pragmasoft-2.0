@@ -1,10 +1,8 @@
 ---
 title: Highestcockpit
-image:
-  src: ~/assets/images/project/java/HIGHESTcockpit_icon.jpg
-  alt: Highestcockpit
-href: '#'
-technologies:
+image: ~/assets/images/project/java/HIGHESTcockpit_icon.jpg
+category: java
+tags:
   - ReactJS
   - Gupl
   - SASS
