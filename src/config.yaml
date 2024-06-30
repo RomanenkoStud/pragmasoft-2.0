@@ -1,5 +1,5 @@
 site:
-  name: PragmaSoft
+  name: Pragmasoft
   site: 'https://pragmasoft.com.ua'
   base: '/'
   trailingSlash: false
@@ -9,14 +9,14 @@ site:
 # Default SEO metadata
 metadata:
   title:
-    default: PragmaSoft
-    template: '%s — PragmaSoft'
-  description: "🪁 PragmaSoft is a team of highly qualified specialists with almost 20 years of successful software development."
+    default: Pragmasoft
+    template: '%s — Pragmasoft'
+  description: "🪁 Pragmasoft is a team of highly qualified specialists with almost 20 years of successful software development."
   robots:
     index: true
     follow: true
   openGraph:
-    site_name: PragmaSoft
+    site_name: Pragmasoft
     images:
       - url: '~/assets/images/default.png'
         width: 1200

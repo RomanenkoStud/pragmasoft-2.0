@@ -25,7 +25,7 @@ const {
   items && (
     <div
       class={twMerge(
-        `grid gap-8 gap-x-12 ${
+        `flex flex-wrap md:grid gap-8 gap-x-12 ${
           columns === 4
             ? 'lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2'
             : columns === 3
@@ -38,7 +38,7 @@ const {
       )}
     >
       {items.map(({ title, description, image, href, classes: itemClasses = {} }) => (
-        <a class={twMerge('relative flex flex-col', panelClass, itemClasses?.panel)} href={href}>
+        <div class={twMerge('relative flex flex-col', panelClass, itemClasses?.panel)}>
           {(image || defaultIcon) && (
             <Image src={image?.src} alt={image?.alt} class={twMerge(imageClass, itemClasses?.image)} />
           )}
@@ -48,7 +48,10 @@ const {
               <p class={twMerge('text-muted mt-2', descriptionClass, itemClasses?.description)} set:html={description} />
             )}
           </div>
-        </a>
+          {href && (
+            <a class="absolute inset-0" href={href}></a>
+          )}
+        </div>
       ))}
     </div>
   )

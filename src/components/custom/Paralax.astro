@@ -8,13 +8,23 @@ import paralax5 from '~/assets/images/paralax/tr-bl3-col-right.png';
 import paralax6 from '~/assets/images/paralax/tr-bl3-fon-right.png';
 import paralax7 from '~/assets/images/paralax/tr-bl3-w-right-bg.png';
 
-import paralax22 from '~/assets/images/paralax/tr-bl4-col-left.png';
-import paralax23 from '~/assets/images/paralax/tr-bl4-fon-left.png';
-import paralax25 from '~/assets/images/paralax/tr-bl4-col-right.png';
-import paralax26 from '~/assets/images/paralax/tr-bl4-fon-right.png';
+import paralax23 from '~/assets/images/paralax/tr-bl4-col-left.png';
+import paralax24 from '~/assets/images/paralax/tr-bl4-fon-left.png';
+import paralax26 from '~/assets/images/paralax/tr-bl4-col-right.png';
+import paralax27 from '~/assets/images/paralax/tr-bl4-fon-right.png';
+
+import paralax53 from '~/assets/images/paralax/tr-bl5-col-left.png';
+import paralax54 from '~/assets/images/paralax/tr-bl5-fon-left.png';
+import paralax56 from '~/assets/images/paralax/tr-bl5-col-right.png';
+import paralax57 from '~/assets/images/paralax/tr-bl5-fon-right.png';
+
+import paralax63 from '~/assets/images/paralax/tr-bl6-col-left.png';
+import paralax64 from '~/assets/images/paralax/tr-bl6-fon-left.png';
+import paralax66 from '~/assets/images/paralax/tr-bl6-col-right.png';
+import paralax67 from '~/assets/images/paralax/tr-bl6-fon-right.png';
 
 interface Props extends Widget {
-  variant?: 'sky'|'orange'|'custom'; //'red'|'blue'
+  variant?: 'sky'|'orange'|'red'|'blue'|'custom';
 }
 
 const {
@@ -24,7 +34,9 @@ const {
 
 const variants = {
   'sky': [paralax1, paralax2, paralax3, paralax4, paralax5, paralax6, paralax7],
-  'orange': [paralax1, paralax22, paralax23, paralax4, paralax25, paralax26, paralax7],
+  'orange': [paralax1, paralax23, paralax24, paralax4, paralax26, paralax27, paralax7],
+  'red': [paralax1, paralax53, paralax54, paralax4, paralax56, paralax57, paralax7],
+  'blue': [paralax1, paralax63, paralax64, paralax4, paralax66, paralax67, paralax7],
 }
 const current = variant !== 'custom' ? variants[variant] : [];
 ---
@@ -78,19 +90,29 @@ const current = variant !== 'custom' ? variants[variant] : [];
 <script>
   function initParallax() {
     const parallaxElements = document.querySelectorAll('.parallax>*');
-    const speed = 5;
+    const speed = 2.5;
 
-    window.addEventListener('scroll', () => {
+    const animate = () => {
       parallaxElements.forEach((element) => {
-        const scrollTop = window.scrollY;
-        const elementTop = element.getBoundingClientRect().top;
-        const velocity = parseFloat((element as HTMLElement).dataset?.velocity || '') || 0;
+        const rect = element.getBoundingClientRect();
+        const topEntered = rect.top > window.innerHeight;
+        const bottomExited = rect.bottom < 0;
 
-        const translateY = (scrollTop - elementTop) * velocity / speed;
+        if(!topEntered || !bottomExited) {
+          const velocity = parseFloat((element as HTMLElement).dataset?.velocity || '') || 0;
 
-        (element as HTMLElement).style.transform = `translateY(${translateY}px)`;
+          const translateY = (window.innerHeight - rect.top) * velocity / speed;
+
+          (element as HTMLElement).style.transform = `translateY(${translateY}px)`;
+        }
       });
+    }
+  
+    window.addEventListener('scroll', () => {
+      requestAnimationFrame(animate);
     });
+
+    requestAnimationFrame(animate);
   }
 
   function onLoad() {

@@ -1,7 +1,6 @@
 import { fetchPosts } from './blog';
 
-
-type ProjectFeature = {
+export type ProjectFeature = {
   title: string,
   image?: {
     src: string,

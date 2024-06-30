@@ -7,13 +7,13 @@ import Paralax from '~/components/custom/Paralax.astro';
 export const DEFAULT_PROJECT_FEATURE: ProjectFeature = {
   title: 'Order a Project',
   image: {
-    src: '~/assets/images/project/free-project2.jpg', 
+    src: '~/assets/images/project/free-project.jpg', 
     alt: 'Order a Project',
   },
   description: ['JavaEE', 'Spring', 'Hibernate', 'JavaME', 'C++', 'ATL', 'WTL', 'MFC'].join(', '),
 }
 
-const javaProjects = await getProjectFeatures('java');
+const cloudProjects = await getProjectFeatures('cloud');
 
 type Props = {
   id?: string;
@@ -26,15 +26,15 @@ const {
 
 <div class="paralax-container" id={id}>
   <Features4
-    title="Java Server applications"
+    title="Cloud<br />computing"
     classes={{
-      container: "bg-[#FFB700]",
+      container: "bg-[#E2371B] text-white",
       items: {
         container: "paralax-items"
       },
     }}
     columns={4}
-    items={[...javaProjects, DEFAULT_PROJECT_FEATURE]}
+    items={[...cloudProjects, DEFAULT_PROJECT_FEATURE]}
     >
     <Fragment slot="subtitle">
       <div class="hidden md:block">
@@ -48,11 +48,11 @@ const {
         </ul>
         <br /><br />
 
+        <p>Cloud computing is a profitable opportunity for enterprises to move their servers and IT departments to outsource, thereby reduce overhead costs and focus more on core business.</p><br /><br />
         <p class="uppercase">What we offer</p>
-        <p>Server-side/client-side high quality Java applications.<br />
-  Pragmasoft Team has a great experience in server application development. Our experience along with the latest technologies and individual approach to each Сlient will provide you with a reliable partner that can meet your requirements and realize the most challenging ideas.</p>
+        <p>IaaS (Infrastructure as a Service), PaaS (Platform as a Service), SaaS (Software as a Service), Public, Private, Hybrid Clouds.</p>
       </div>
     </Fragment>
   </Features4>
-  <Paralax variant='orange'/>
+  <Paralax variant='red'/>
 </div>

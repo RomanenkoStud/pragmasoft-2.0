@@ -14,6 +14,8 @@ metadata:
   description: AFFORDRX – site that provide up to 75% discount on medication with free prescription drug card. Developed by Pragmasoft
 ---
 
+*Technologies:* JavaEE, RestEASY, HTMLEasy, MySQL, Hibernate, Jboss7, Twitter Bootstrap, jQuery.
+
 Affordrx.com is a site that provide up to 75% discount on medication with free prescription drug card.
 
 * Database development
@@ -22,7 +24,5 @@ Affordrx.com is a site that provide up to 75% discount on medication with free p
 * Client-side development (HTML, Twitter Bootstrap, jQuery)
 
 ![affordrx](~/assets/images/project/java/AffordRX.jpg)
-
 ![affordrx](~/assets/images/project/java/AffordRX_1.jpg)
-
 ![affordrx](~/assets/images/project/java/AffordRX_3.jpg)

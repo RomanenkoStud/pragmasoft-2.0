@@ -16,33 +16,28 @@ const {
 
 <div class="paralax-container" id={id}>
   <Features4
-    id="mobile-app-development"
     title="Mobile App<br />Development"
     classes={{
-      container: "bg-[#81CDDB] max-w-full", 
-      headline: {
-        title: "font-thin text-[40px] mb-20 text-center", 
-        container: "text-start text-[18px] md:max-w-[970px] mx-auto",
-      },
+      container: "bg-[#81CDDB]",
       items: {
-        container: "paralax-items text-[18px] mt-[105px] md:w-[970px] mx-auto justify-items-center place-content-center"
-      }
+        container: "paralax-items"
+      },
     }}
     columns={4}
     items={mobileProjects}
     >
     <Fragment slot="subtitle">
-      <p>In today's world, phones have long ceased to be a communication means only. They enable us to be in touch with our near and dear ones, to stay tuned, to kill time in queues,to stay in social networks for hours  or to play applications. We keep so much information in our phones that can hardly imagine life without them. Precisely these needs created a great space for mobile developers.</p>
-      <p>We really are professionals in mobile software development and can offer you not only a full cycle software development process for IOS, Android, Blackberry mobile platforms, but also the server-side.</p><br /><br />
-
-      <p class="uppercase">What we offer</p>
-      <ul class="list-disc">
-        <li>IOS,</li>
-        <li>Android,</li>
-        <li>Cross platform,</li>
-        <li>Server-side,</li>
-        <li>Client solutions.</li>
-      </ul>
+      <div class="hidden md:block">
+        <p class="uppercase">Advantages of cloud computing</p>
+        <ul class="list-disc">
+          <li>Disk space saving</li>
+          <li>High speed of data processing</li>
+          <li>Reduction of costs for hardware, software, maintenance and  electricity</li>
+          <li>Reduced requirements for the PC processing power (access to the Internet is a must)</li>
+          <li>Security</li>
+          <li>Fault-tolerance</li>
+        </ul>
+      </div>
     </Fragment>
   </Features4>
   <Paralax variant='sky'/>

@@ -30,10 +30,10 @@ const {
 } = Astro.props;
 ---
 
-<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto overflow-hidden ${classes?.container ?? ''}`} bg={bg}>
+<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto text-xl font-thin overflow-hidden ${classes?.container ?? ''}`} bg={bg}>
   <Headline title="What we offer" classes={{title: "font-heading text-secondary font-thin text-5xl"}}/>
-  <div class="hidden md:flex flex-col max-w-[856px] mx-auto">
-    <div class="relative flex flex-row place-content-between font-thin text-[18px] text-center uppercase">
+  <div class="hidden md:flex flex-col max-w-[856px] mx-auto ">
+    <div class="relative flex flex-row place-content-between text-center uppercase">
       <div class="relative w-[48%] mb-[50px] bg-page shadow-md">
         <div class="flex flex-col my-[28px] mr-[20px] ml-[140px]">
           {
@@ -66,13 +66,13 @@ const {
         <div class="absolute block bottom-[45px] right-[-150px]"><Image src={paperBird}  alt="Paper bird"></div>
     </div>
   </div>   
-  <div class="md:hidden flex flex-col w-full">
+  <div class="md:hidden flex flex-col items-center w-full px-[60px] text-center uppercase">
     {
       [...offers1, ...offers2].map((offer, index) => (
         offer && (
           <Fragment>
-            <span class=""><Fragment set:html={offer} /></span>
-            {index !== offers2.length - 1 && (<hr class="mt-[12px] mb-[12px] border-t border-[#24ac8f]"/>)}
+            <span class="flex max-w-64 text-wrap"><Fragment set:html={offer} /></span>
+            {index !== offers2.length - 1 && (<hr class="w-full mt-[12px] mb-[12px] border-t border-[#eee]"/>)}
           </Fragment>
         )
       ))
