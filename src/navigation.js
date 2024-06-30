@@ -5,23 +5,23 @@ export const headerData = {
   links: [
     {
       text: 'About us',
-      href: '/#about',
+      href: '#about',
     },
     {
       text: 'Projects',
-      href: '/#projects',
+      href: '#projects',
     },
     {
       text: 'Our team',
-      href: '/#team',
+      href: '#team',
     },
     {
       text: 'Quality',
-      href: '/#quality',
+      href: '#quality',
     },
     {
       text: 'Vacancies',
-      href: '/#vacancies',
+      href: '#vacancies',
     },
   ],
   // actions: [{ text: 'Download', href: 'https://github.com/onwidget/astrowind', target: '_blank' }],
@@ -29,9 +29,9 @@ export const headerData = {
 
 export const footerData = {
   secondaryLinks: [
-    { text: 'About', href: '/#about' },
-    { text: 'Team', href: '/#team' },
-    { text: 'Vacancies', href: '/#vacancies' },
+    { text: 'About', href: '#about' },
+    { text: 'Team', href: '#team' },
+    { text: 'Vacancies', href: '#vacancies' },
   ],
   socialLinks: [
     { ariaLabel: 'X', icon: 'tabler:brand-x', href: '#' },
