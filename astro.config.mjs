@@ -28,7 +28,6 @@ export default defineConfig({
   output: 'static',
 
   base: '/pragmasoft-2.0',
-  outDir: './dist/pragmasoft-2.0',
 
   integrations: [
     tailwind({
