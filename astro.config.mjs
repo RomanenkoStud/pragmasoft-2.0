@@ -70,7 +70,7 @@ export default defineConfig({
     }),
 
     astrowind({
-      config: './src/config.yaml',
+      config: `./src/config-${import.meta.env.DEV ? 'dev' : 'prod'}.yaml`,
     }),
   ],
 
