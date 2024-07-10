@@ -1,6 +1,7 @@
 backend:
   name: github
-  branch: main
+  repo: RomanenkoStud/pragmasoft-2.0
+  branch: master
 
 media_folder: 'src/assets/images'
 public_folder: '/_astro'
