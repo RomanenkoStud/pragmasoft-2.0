@@ -1,6 +1,5 @@
 backend:
-  name: github
-  repo: RomanenkoStud/pragmasoft-2.0
+  name: git-gateway
   branch: master
 
 media_folder: 'src/assets/images'
