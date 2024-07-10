@@ -1,17 +1,15 @@
 ---
 title: Horse racing
-excerpt: HORSE RACING – nice example of sport site design, which corresponds to
-  main tendencies pointed out in Smashing magazine sport site showcase.
-  Developed by Pragmasoft
 category: design
 tags:
   - Web design
   - UI optimization
   - logo design
   - XHTML\CSS
-image: ~/assets/images/project/design/
-publishDate: 2024-07-10T12:54:58.830Z
-author: Pragmasoft
+image: ~/assets/images/project/design/horse.jpg
+metadata:
+  keywords: Pragmasoft, web design, HORSE RACING
+  description: HORSE RACING – nice example of sport site design, which corresponds to main tendencies pointed out in Smashing magazine sport site showcase. Developed by Pragmasoft
 ---
 *Technologies:* web design, UI optimization, logo design, XHTML/CSS.
 
