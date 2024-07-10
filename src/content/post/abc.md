@@ -24,6 +24,6 @@ ABC is a nice example of our HTML/CSS coding. Cross-browser testing was conveyed
 
 Well, this project was special since its major limitations (page width, header width, navigation menu style, background pattern), though we managed to give the site a decent appearance. Work was challenging, and we should admit we like challenges!
 
-![acai](~/assets/images/project/design/ABC-1.jpg)
-![acai](~/assets/images/project/design/ABC-2.jpg)
-![acai](~/assets/images/project/design/ABC-3.jpg)
+![ABC](~/assets/images/project/design/ABC-1.jpg)
+![ABC](~/assets/images/project/design/ABC-2.jpg)
+![ABC](~/assets/images/project/design/ABC-3.jpg)
