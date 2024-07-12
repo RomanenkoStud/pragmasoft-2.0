@@ -1,0 +1,65 @@
+---
+import Image from '~/components/common/Image.astro';
+import { getImage } from "astro:assets";
+import Hero2 from '~/components/widgets/Hero.astro';
+import Testimonials2 from '~/components/widgets/Testimonials2.astro';
+import type { HeroSection } from '~/types';
+
+import backgroundWhite from '~/assets/images/bg/background.jpg';
+import backgroundColor from '~/assets/images/hero/top-calor-tr3.png';
+
+const optimizedBackgroundWhite = await getImage({src: backgroundWhite, format: 'jpg'});
+const optimizedBackgroundColor = await getImage({src: backgroundColor, format: 'png'});
+
+type Props = {
+  id?: string;
+  section: HeroSection;
+}
+
+const {
+  id,
+  section,
+} = Astro.props;
+---
+
+<Hero2 id={id} classes={{content: "!p-0 !pt-[76px] lg:!pb-20"}}>
+  <Fragment slot="bg">
+    <div class="absolute inset-0 flex md:pt-[76px] [background:var(--pragma-hero-bg-white)_top_center_scroll_repeat]" 
+      style={`--pragma-hero-bg-white: url(${optimizedBackgroundWhite.src});`}>
+      <div class="relative flex w-full items-center lg:items-start px-[15px] lg:[background:var(--pragma-hero-bg-colors)_top_center_scroll_no-repeat]" 
+        style={`--pragma-hero-bg-colors: url(${optimizedBackgroundColor.src});`}
+      >
+        <div class="mx-auto grid md:w-[750px] lg:w-[970px] min-h-[105px] lg:min-h-[284px]">
+          <Image
+            class="block lg:hidden mt-[40px] !object-contain justify-self-center"
+            loading="eager"
+            width={678}
+            height={35}
+            src="~/assets/images/hero/01m_txt_2.png"
+            alt=""
+          />
+          <Image
+            class="slogan hidden lg:block [&:not(.slogan-active)]:-translate-x-96 duration-1000 transition-transform"
+            loading="eager"
+            width={439}
+            height={114}
+            src="~/assets/images/hero/01f_txt.png"
+            alt=""
+          />
+        </div>
+      </div>
+    </div>
+    <script>
+      document.addEventListener('astro:page-load', () => {
+        [...document.querySelectorAll('.slogan')].forEach((el) => {
+          el.classList.add('slogan-active');
+        })
+      });
+    </script>
+  </Fragment>
+  <Fragment slot="content">
+    <Testimonials2
+      testimonials={section.testimonials}
+    />
+  </Fragment>
+</Hero2>

@@ -49,14 +49,16 @@ export interface BaseSection {
   id: string;
   slug: string;
 
-  title: string;
-
   /**  */
   Content?: AstroComponentFactory;
   content?: string;
 }
 
-export interface ProjectSection extends BaseSection {
+export interface NamedSection extends BaseSection {
+  title: string;
+}
+
+export interface ProjectSection extends NamedSection {
   type: 'projects',
 
   /**  */
@@ -67,17 +69,42 @@ export interface ProjectSection extends BaseSection {
   defaultItem?: ClickableItem;
 }
 
-export interface AboutSection extends BaseSection {
+export interface AboutSection extends NamedSection {
   type: 'about',
 
   /**  */
-  stats: [Stat, Stat, Stat, Stat],
+  stats: Stat[],
 
   /**  */
   offers: [string[], string[]],
 }
 
-export type Section = ProjectSection | AboutSection;
+export interface TeamSection extends NamedSection {
+  type: 'team',
+
+  /**  */
+  members: string[],
+}
+
+export interface HeroSection extends BaseSection {
+  type: 'hero',
+
+  /**  */
+  testimonials: SimpleTestimonial[],
+}
+
+export interface TextSection extends NamedSection {
+  type: 'text',
+
+  /**  */
+  background?: 'gray',
+}
+
+export type Section = ProjectSection | AboutSection | TeamSection | HeroSection | TextSection;
+
+export interface SimpleTestimonial {
+  testimonial: string;
+}
 
 export interface Taxonomy {
   slug: string;

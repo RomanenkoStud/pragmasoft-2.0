@@ -63,19 +63,24 @@ const postCollection = defineCollection({
   }),
 });
 
-const baseSectionDefinition = z.object({
+const namedSectionDefinition = z.object({
   title: z.string(),
 });
 
-const stat = z.object({
+const statDefinition = z.object({
   amount: z.string(),
   title: z.string(),
 });
 
+const testimonialDefinition = z.object({
+  testimonial: z.string(),
+});
+
+
 const sectionCollection = defineCollection({
   schema: z.union([
-    baseSectionDefinition.merge(z.object({
-      type: z.enum(["projects"]),
+    namedSectionDefinition.merge(z.object({
+      type: z.literal("projects"),
       variant: z.enum(["custom", "sky", "orange", "red", "blue"]),
       parallax: z.boolean(),
 
@@ -85,12 +90,27 @@ const sectionCollection = defineCollection({
         tags: z.array(z.string()).optional(),
       }).optional(),
     })),
-    baseSectionDefinition.merge(z.object({
-      type: z.enum(["about"]),
+    namedSectionDefinition.merge(z.object({
+      type: z.literal("about"),
 
-      stats: z.tuple([stat, stat, stat, stat]),
+      stats: z.array(statDefinition).length(4),
       offers: z.tuple([z.array(z.string()), z.array(z.string())]),
     })),
+    namedSectionDefinition.merge(z.object({
+      type: z.literal("team"),
+
+      members: z.array(z.string()).length(10),
+    })),
+    namedSectionDefinition.merge(z.object({
+      type: z.literal("text"),
+
+      background: z.enum(["gray"]).optional(),
+    })),
+    z.object({
+      type: z.literal("hero"),
+
+      testimonials: z.array(testimonialDefinition),
+    })
   ]),
 });
 

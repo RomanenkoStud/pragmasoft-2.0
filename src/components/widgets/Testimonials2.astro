@@ -3,10 +3,8 @@ import { getImage } from "astro:assets";
 
 import arrowLeft from '~/assets/images/testimonials/switch-left.png';
 import arrowRight from '~/assets/images/testimonials/switch-right.png';
+import type { SimpleTestimonial } from "~/types";
 
-type SimpleTestimonial = {
-  testimonial: string;
-}
 type Props = {
   testimonials: SimpleTestimonial[];
 }
@@ -48,7 +46,7 @@ const optimizedArrowRight = await getImage({src: arrowRight, format: 'png'});
     const carousels = document.querySelectorAll('[data-carousel]');
 
     const nextSlide = (content: HTMLElement, silent = false) => {
-      let slides = [...content.querySelectorAll('[data-carousel-slide]')] as HTMLElement[];
+      const slides = [...content.querySelectorAll('[data-carousel-slide]')] as HTMLElement[];
 
       slides.forEach((slide, index) => slide.classList.toggle('current', index === currentSlideIndex));
       content.style.transitionProperty =  silent ? 'none' : 'transform';

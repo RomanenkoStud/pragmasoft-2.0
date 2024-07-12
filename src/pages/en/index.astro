@@ -1,16 +1,12 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
-
-import Hero from './_sections/Hero.astro';
 import Section from './_sections/Section.astro';
-import Team from './_sections/Team.astro';
-import Quality from './_sections/Quality.astro';
 ---
 
 <Layout metadata={{
   ignoreTitleTemplate: true,
 }}>
-  <Hero/>
+  <Section name="hero"/>
 
   <Section id="about" name="about"/>
 
@@ -21,7 +17,7 @@ import Quality from './_sections/Quality.astro';
     <Section id="web-design" name="design"/>
   </div>
 
-  <Team id="team"/>
+  <Section id="team" name="team"/>
 
-  <Quality id="quality"/>
+  <Section id="quality" name="quality"/>
 </Layout>

@@ -7,13 +7,49 @@ const getNormalizedSection = async (section: CollectionEntry<'section'>): Promis
   const { id, slug: rawSlug = '', data } = section;
   const { Content } = await section.render();
 
-  const {title, ...sectionData} = data;
-
   const slug = cleanSlug(rawSlug); // cleanSlug(rawSlug.split('/').pop());
+  const {type} = data;
 
-  switch(sectionData.type) {
+  switch(type) {
+    case 'text': {
+      const {title, background} = data;
+      return {
+        id: id,
+        slug: slug,
+        background: background,
+    
+        title: title,
+        type: type,
+    
+        Content: Content,
+      };
+    }
+    case 'hero': {
+      const {testimonials} = data;
+      return {
+        id: id,
+        slug: slug,
+        testimonials: testimonials,
+    
+        type: type,
+    
+        Content: Content,
+      };
+    }
+    case 'team': {
+      const {title, members} = data;
+      return {
+        id: id,
+        slug: slug,
+        members: members,
+    
+        title: title,
+        type: type,
+        Content: Content,
+      };
+    };
     case 'about': {
-      const {type, stats, offers} = sectionData;
+      const {title, stats, offers} = data;
       return {
         id: id,
         slug: slug,
@@ -23,11 +59,10 @@ const getNormalizedSection = async (section: CollectionEntry<'section'>): Promis
         title: title,
         type: type,
         Content: Content,
-        // or 'content' in case you consume from API
       };
     };
     case 'projects': {
-      const {type, variant, parallax, defaultItem} = sectionData;
+      const {title, variant, parallax, defaultItem} = data;
       return {
         id: id,
         slug: slug,
@@ -46,7 +81,6 @@ const getNormalizedSection = async (section: CollectionEntry<'section'>): Promis
         },
     
         Content: Content,
-        // or 'content' in case you consume from API
       };
     }
   }

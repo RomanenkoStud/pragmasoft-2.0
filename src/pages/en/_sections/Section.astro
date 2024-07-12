@@ -2,6 +2,9 @@
 import { findSectionBySlug } from '~/utils/section';
 import ProjectSection from './ProjectSection.astro';
 import AboutSection from './AboutSection.astro';
+import TeamSection from './TeamSection.astro';
+import HeroSection from './HeroSection.astro';
+import TextSection from './TextSection.astro';
 
 type Props = {
   id?: string;
@@ -21,5 +24,11 @@ const section = await findSectionBySlug(Astro.currentLocale + '/' + name);
     ? <ProjectSection id={id} section={section}/>
     : section.type === 'about'
       ? <AboutSection id={id} section={section}/> 
-      : <Fragment/>
-  }
+      : section.type === 'team'
+        ? <TeamSection id={id} section={section}/> 
+        : section.type === 'hero'
+          ? <HeroSection id={id} section={section}/> 
+          : section.type === 'text'
+            ? <TextSection id={id} section={section}/> 
+            : <Fragment/>
+}

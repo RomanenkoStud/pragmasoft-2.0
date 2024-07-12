@@ -1,0 +1,48 @@
+---
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import { getImage } from "astro:assets";
+import type { TextSection } from '~/types';
+
+import bgGray from '~/assets/images/bg/background.jpg';
+
+type Props = {
+  id?: string;
+  section: TextSection;
+}
+
+const {
+  id,
+  section,
+} = Astro.props;
+
+const optimizedBackgrounds = {
+  'gray': await getImage({src: bgGray, format: 'jpg'})
+}
+
+const background = section.background && optimizedBackgrounds[section.background];
+---
+
+<WidgetWrapper id={id} containerClass="">
+  <Headline classes={{
+    title: "font-thin text-[40px] mb-20 text-center", 
+    container: "text-start text-[18px] md:max-w-[970px] mx-auto",
+  }}>
+    <Fragment slot="title">
+      {section.title}
+    </Fragment>
+    <Fragment slot="subtitle">
+      {section.Content ? <section.Content /> : <Fragment set:html={section.content || ''} />}
+    </Fragment>
+  </Headline>
+  {background && (
+    <Fragment slot="bg">
+      <div class="[background:var(--pragma-team-bg)_top_center_scroll_repeat] w-full h-full"
+        style={`--pragma-team-bg:url(${background.src})`}>
+      </div>    
+    </Fragment>
+  )}
+</WidgetWrapper>
+<style>
+
+</style>

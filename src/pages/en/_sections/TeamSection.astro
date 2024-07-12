@@ -3,15 +3,18 @@ import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
 import Image from '~/components/common/Image.astro';
 import { getImage } from "astro:assets";
+import type { TeamSection } from '~/types';
 
 import backgroundImage from '~/assets/images/bg/background-2.jpg';
 
 type Props = {
   id?: string;
+  section: TeamSection;
 }
 
 const {
   id,
+  section,
 } = Astro.props;
 
 const optimizedBackground = await getImage({src: backgroundImage, format: 'jpg'});
@@ -32,16 +35,13 @@ const optimizedBackground = await getImage({src: backgroundImage, format: 'jpg'}
     </div>    
   </Fragment>
   <div class="photo-container">
-    <div class="item md:row-span-2"><Image src="~/assets/images/team/1.jpg" alt=""></div>
-    <div class="item"><Image src="~/assets/images/team/2.jpg" alt=""></div>
-    <div class="item"><Image src="~/assets/images/team/3.jpg" alt=""></div>
-    <div class="item"><Image src="~/assets/images/team/4.jpg" alt=""></div>
-    <div class="item"><Image src="~/assets/images/team/5.jpg" alt=""></div>
-    <div class="item"><Image src="~/assets/images/team/6.jpg" alt=""></div>
-    <div class="item"><Image src="~/assets/images/team/7.jpg" alt=""></div>
-    <div class="item"><Image src="~/assets/images/team/8.jpg" alt=""></div>
-    <div class="item"><Image src="~/assets/images/team/9.jpg" alt=""></div>
-    <div class="item md:col-span-2"><Image src="~/assets/images/team/10.jpg" alt=""></div>
+    {section.members.map((image, index, arr) => (
+      <div class={`item ${
+        index === 0 ? 'md:row-span-2' : ''
+      } ${
+        index === arr.length - 1 ? 'md:col-span-2' : ''
+      }`}><Image src={image} alt=""/></div>
+    ))}
   </div>
 </WidgetWrapper>
 <style>
