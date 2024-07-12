@@ -10,7 +10,10 @@ export type ProjectFeature = {
   href?: string,
 }
 
-export async function getProjectFeatures(category: string, locale: string = 'en'): Promise<ProjectFeature[]> {
+export async function getProjectFeatures(slug: string): Promise<ProjectFeature[]> {
+  const [locale, ...baseSlugParts] = slug.split('/');
+  const category = baseSlugParts.join('/');
+
   const projects = (await getLocalePosts())[locale]
     .filter((project) => project.category?.title && category === project.category?.title);
   

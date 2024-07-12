@@ -1,0 +1,25 @@
+---
+import { findSectionBySlug } from '~/utils/section';
+import ProjectSection from './ProjectSection.astro';
+import AboutSection from './AboutSection.astro';
+
+type Props = {
+  id?: string;
+  name: string,
+}
+
+const {
+  id,
+  name,
+} = Astro.props;
+
+const section = await findSectionBySlug(Astro.currentLocale + '/' + name);
+---
+
+{
+  section.type === 'projects' 
+    ? <ProjectSection id={id} section={section}/>
+    : section.type === 'about'
+      ? <AboutSection id={id} section={section}/> 
+      : <Fragment/>
+  }

@@ -1,0 +1,25 @@
+---
+import type { AboutSection } from '~/types';
+import Stats2 from '~/components/widgets/Stats2.astro';
+import WhatWeOffer from '~/components/custom/WhatWeOffer.astro';
+
+type Props = {
+  id?: string;
+  section: AboutSection,
+}
+
+const {
+  id,
+  section,
+} = Astro.props;
+---
+
+<div class="w-full bg-[#31cbaa]" id={id}>
+  <Stats2
+    stats={section.stats}
+  />
+  <WhatWeOffer
+    title={section.title}
+    offers={section.offers}
+  />
+</div>

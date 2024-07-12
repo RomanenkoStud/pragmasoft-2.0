@@ -1,0 +1,48 @@
+---
+import type { ProjectSection } from '~/types';
+import { getProjectFeatures } from '~/utils/projects';
+import Features4 from '~/components/widgets/Features4.astro';
+import Parallax from '~/components/custom/Parallax.astro';
+
+type Props = {
+  id?: string;
+  section: ProjectSection,
+}
+
+const {
+  id,
+  section,
+} = Astro.props;
+
+const {variant} = section;
+const variants = {
+  'sky': '#81CDDB',
+  'orange': '#FFB700',
+  'red': '#E2371B',
+  'blue': '#00B0F3',
+}
+const color = variant !== 'custom' ? variants[variant] : '';
+
+const projects = await getProjectFeatures(section.slug);
+---
+
+<div class={`${section.parallax ? 'parallax-container' : ''}`} id={id} style={`--pragma-section-bg:${color}`}>
+  <Features4
+    title={section.title}
+    classes={{
+      container: "bg-[var(--pragma-section-bg)] text-white",
+      items: {
+        container: `${section.parallax ? 'parallax-items' : ''}`
+      },
+    }}
+    columns={4}
+    items={[...projects, ...(section.defaultItem ? [section.defaultItem] : [])]}
+    >
+    <Fragment slot="subtitle">
+      <div class="hidden md:block">
+        {section.Content ? <section.Content /> : <Fragment set:html={section.content || ''} />}
+      </div>
+    </Fragment>
+  </Features4>
+  {section.parallax && <Parallax variant={variant}/>}
+</div>

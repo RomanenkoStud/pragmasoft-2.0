@@ -63,6 +63,38 @@ const postCollection = defineCollection({
   }),
 });
 
+const baseSectionDefinition = z.object({
+  title: z.string(),
+});
+
+const stat = z.object({
+  amount: z.string(),
+  title: z.string(),
+});
+
+const sectionCollection = defineCollection({
+  schema: z.union([
+    baseSectionDefinition.merge(z.object({
+      type: z.enum(["projects"]),
+      variant: z.enum(["custom", "sky", "orange", "red", "blue"]),
+      parallax: z.boolean(),
+
+      defaultItem: z.object({
+        title: z.string(),
+        image: z.string(),
+        tags: z.array(z.string()).optional(),
+      }).optional(),
+    })),
+    baseSectionDefinition.merge(z.object({
+      type: z.enum(["about"]),
+
+      stats: z.tuple([stat, stat, stat, stat]),
+      offers: z.tuple([z.array(z.string()), z.array(z.string())]),
+    })),
+  ]),
+});
+
 export const collections = {
   post: postCollection,
+  section: sectionCollection,
 };

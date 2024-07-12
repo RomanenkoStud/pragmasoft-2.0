@@ -1,5 +1,6 @@
 import type { AstroComponentFactory } from 'astro/runtime/server/index.js';
 import type { HTMLAttributes, ImageMetadata } from 'astro/types';
+import type ProjectSection from './pages/en/_sections/ProjectSection.astro';
 
 export interface Post {
   /** A unique ID number that identifies a post. */
@@ -43,6 +44,40 @@ export interface Post {
   /**  */
   readingTime?: number;
 }
+
+export interface BaseSection {
+  id: string;
+  slug: string;
+
+  title: string;
+
+  /**  */
+  Content?: AstroComponentFactory;
+  content?: string;
+}
+
+export interface ProjectSection extends BaseSection {
+  type: 'projects',
+
+  /**  */
+  variant: 'sky'|'orange'|'red'|'blue'|'custom';
+  parallax: boolean;
+
+  /**  */
+  defaultItem?: ClickableItem;
+}
+
+export interface AboutSection extends BaseSection {
+  type: 'about',
+
+  /**  */
+  stats: [Stat, Stat, Stat, Stat],
+
+  /**  */
+  offers: [string[], string[]],
+}
+
+export type Section = ProjectSection | AboutSection;
 
 export interface Taxonomy {
   slug: string;

@@ -1,0 +1,124 @@
+---
+import type { Widget, Section } from '~/types';
+import parallax1 from '~/assets/images/parallax/bg-piramid.png';
+import parallax2 from '~/assets/images/parallax/tr-bl3-col-left.png';
+import parallax3 from '~/assets/images/parallax/tr-bl3-fon-left.png';
+import parallax4 from '~/assets/images/parallax/tr-bl3-w-left-bg.png';
+import parallax5 from '~/assets/images/parallax/tr-bl3-col-right.png';
+import parallax6 from '~/assets/images/parallax/tr-bl3-fon-right.png';
+import parallax7 from '~/assets/images/parallax/tr-bl3-w-right-bg.png';
+
+import parallax23 from '~/assets/images/parallax/tr-bl4-col-left.png';
+import parallax24 from '~/assets/images/parallax/tr-bl4-fon-left.png';
+import parallax26 from '~/assets/images/parallax/tr-bl4-col-right.png';
+import parallax27 from '~/assets/images/parallax/tr-bl4-fon-right.png';
+
+import parallax53 from '~/assets/images/parallax/tr-bl5-col-left.png';
+import parallax54 from '~/assets/images/parallax/tr-bl5-fon-left.png';
+import parallax56 from '~/assets/images/parallax/tr-bl5-col-right.png';
+import parallax57 from '~/assets/images/parallax/tr-bl5-fon-right.png';
+
+import parallax63 from '~/assets/images/parallax/tr-bl6-col-left.png';
+import parallax64 from '~/assets/images/parallax/tr-bl6-fon-left.png';
+import parallax66 from '~/assets/images/parallax/tr-bl6-col-right.png';
+import parallax67 from '~/assets/images/parallax/tr-bl6-fon-right.png';
+
+interface Props extends Widget {
+  variant?: Section['variant'];
+}
+
+const {
+  variant = 'sky',
+} = Astro.props;
+
+const variants = {
+  'sky': [parallax1, parallax2, parallax3, parallax4, parallax5, parallax6, parallax7],
+  'orange': [parallax1, parallax23, parallax24, parallax4, parallax26, parallax27, parallax7],
+  'red': [parallax1, parallax53, parallax54, parallax4, parallax56, parallax57, parallax7],
+  'blue': [parallax1, parallax63, parallax64, parallax4, parallax66, parallax67, parallax7],
+}
+const current = variant !== 'custom' ? variants[variant] : [];
+---
+
+<div class="parallax hidden md:block">
+  {
+    variant !== 'custom' ? (
+      <Fragment>
+        <div class="top-[840px] z-[9] h-full [background:var(--pragma-parallax-1)_0_0_repeat]" data-velocity="-.1"
+          style={`--pragma-parallax-1:url(${current[0].src})`}
+        ></div>
+        <div class="top-[700px] z-[12] h-[800px] [background:var(--pragma-parallax-2)_top_center_no-repeat]" data-velocity="-.5"
+          style={`--pragma-parallax-2:url(${current[1].src})`}
+        ></div>
+        <div class="top-[900px] z-[11] h-[800px] [background:var(--pragma-parallax-3)_top_center_no-repeat]" data-velocity="-.7"
+          style={`--pragma-parallax-3:url(${current[2].src})`}
+        ></div>
+        <div class="top-[800px] z-[10] h-[800px] [background:var(--pragma-parallax-4)_top_center_no-repeat]" data-velocity="-.9"
+          style={`--pragma-parallax-4:url(${current[3].src})`}
+        ></div>
+        <div class="top-[550px] z-[15] h-[800px] [background:var(--pragma-parallax-5)_top_center_no-repeat]" data-velocity="-.5"
+          style={`--pragma-parallax-5:url(${current[4].src})`}
+        ></div>
+        <div class="top-[850px] z-[14] h-[800px] [background:var(--pragma-parallax-6)_top_center_no-repeat]" data-velocity="-.7"
+          style={`--pragma-parallax-6:url(${current[5].src})`}
+        ></div>
+        <div class="top-[600px] z-[13] h-[800px] [background:var(--pragma-parallax-7)_top_center_no-repeat]" data-velocity="-.9"
+          style={`--pragma-parallax-7:url(${current[6].src})`}
+        ></div>
+      </Fragment>
+    ) : (<slot />)
+  }
+</div>
+<style is:global>
+  .parallax-container {
+    position: relative;
+    overflow: hidden;
+    z-index: 8;
+  }
+  .parallax-items {
+    z-index: 16;
+    position: relative;
+  }
+  .parallax > * {
+    pointer-events: none;
+    position: absolute;
+    display: block;
+    width: 100%
+  }
+</style>
+<script>
+  function initParallax() {
+    const parallaxElements = document.querySelectorAll('.parallax>*');
+    const speed = 2.5;
+
+    const animate = () => {
+      parallaxElements.forEach((element) => {
+        const rect = element.getBoundingClientRect();
+        const topEntered = rect.top > window.innerHeight;
+        const bottomExited = rect.bottom < 0;
+
+        if(!topEntered || !bottomExited) {
+          const velocity = parseFloat((element as HTMLElement).dataset?.velocity || '') || 0;
+
+          const translateY = (window.innerHeight - rect.top) * velocity / speed;
+
+          (element as HTMLElement).style.transform = `translateY(${translateY}px)`;
+        }
+      });
+    }
+  
+    window.addEventListener('scroll', () => {
+      requestAnimationFrame(animate);
+    });
+
+    requestAnimationFrame(animate);
+  }
+
+  function onLoad() {
+    initParallax();
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    onLoad();
+  });
+</script>
