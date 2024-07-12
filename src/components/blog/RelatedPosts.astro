@@ -21,7 +21,7 @@ const relatedPosts = post.tags ? await getRelatedPosts(post, 4) : [];
       classes={{ container: 'pt-0 lg:pt-0 md:pt-0' }}
       title="Related Posts"
       linkText="View All Posts"
-      linkUrl={getBlogPermalink()}
+      linkUrl={getBlogPermalink(Astro.currentLocale)}
       postIds={relatedPosts.map((post) => post.id)}
     />
   ) : null

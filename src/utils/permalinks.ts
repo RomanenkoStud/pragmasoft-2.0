@@ -1,6 +1,6 @@
 import slugify from 'limax';
 
-import { SITE, APP_BLOG } from 'astrowind:config';
+import { SITE, APP_BLOG } from 'astrowind:config'
 
 import { trim } from '~/utils/utils';
 
@@ -52,13 +52,16 @@ export const getPermalink = (slug = '', type = 'page'): string => {
     return slug;
   }
 
+  const [locale, ...baseSlugParts] = slug.split('/');
+  const baseSlug = baseSlugParts.join('/');
+
   switch (type) {
     case 'home':
-      permalink = getHomePermalink();
+      permalink = getHomePermalink(slug);
       break;
 
     case 'blog':
-      permalink = getBlogPermalink();
+      permalink = getBlogPermalink(slug);
       break;
 
     case 'asset':
@@ -66,11 +69,11 @@ export const getPermalink = (slug = '', type = 'page'): string => {
       break;
 
     case 'category':
-      permalink = createPath(CATEGORY_BASE, trimSlash(slug));
+      permalink = createPath(locale, CATEGORY_BASE, trimSlash(baseSlug));
       break;
 
     case 'tag':
-      permalink = createPath(TAG_BASE, trimSlash(slug));
+      permalink = createPath(locale, TAG_BASE, trimSlash(baseSlug));
       break;
 
     case 'post':
@@ -87,10 +90,10 @@ export const getPermalink = (slug = '', type = 'page'): string => {
 };
 
 /** */
-export const getHomePermalink = (): string => getPermalink('/');
+export const getHomePermalink = (locale?: string): string => getPermalink(locale ?? '/');
 
 /** */
-export const getBlogPermalink = (): string => getPermalink(BLOG_BASE);
+export const getBlogPermalink = (locale?: string): string => getPermalink(locale ? locale + '/' + BLOG_BASE : BLOG_BASE);
 
 /** */
 export const getAsset = (path: string): string =>
@@ -123,14 +126,15 @@ export const applyGetPermalinks = (menu: Menu|Menu[] = {}): Record<string, strin
         if (typeof menu[key] === 'string') {
           obj[key] = getPermalink(menu[key] as string);
         } else if (typeof menu[key] === 'object') {
-          if ((menu[key] as MenuItem).type === 'home') {
-            obj[key] = getHomePermalink();
-          } else if ((menu[key] as MenuItem).type === 'blog') {
-            obj[key] = getBlogPermalink();
-          } else if ((menu[key] as MenuItem).type === 'asset') {
-            obj[key] = getAsset((menu[key] as MenuItem).url);
-          } else if ((menu[key] as MenuItem).url) {
-            obj[key] = getPermalink((menu[key] as MenuItem).url, (menu[key] as MenuItem).type);
+          const menuItem = menu[key] as MenuItem;
+          if (menuItem.type === 'home') {
+            obj[key] = getHomePermalink(menuItem.url);
+          } else if (menuItem.type === 'blog') {
+            obj[key] = getBlogPermalink(menuItem.url);
+          } else if (menuItem.type === 'asset') {
+            obj[key] = getAsset(menuItem.url);
+          } else if (menuItem.url) {
+            obj[key] = getPermalink(menuItem.url, menuItem.type);
           }
         }
       } else {

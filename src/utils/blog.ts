@@ -60,23 +60,25 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
   const slug = cleanSlug(rawSlug); // cleanSlug(rawSlug.split('/').pop());
   const publishDate = new Date(rawPublishDate);
   const updateDate = rawUpdateDate ? new Date(rawUpdateDate) : undefined;
+  const [locale, ...baseSlugParts] = slug.split('/');
+  const baseSlug = baseSlugParts.join('/');
 
   const category = rawCategory
     ? {
-        slug: cleanSlug(rawCategory),
+        slug: locale + '/' + cleanSlug(rawCategory),
         title: rawCategory,
       }
     : undefined;
 
   const tags = rawTags.map((tag: string) => ({
-    slug: cleanSlug(tag),
+    slug: locale + '/' + cleanSlug(tag),
     title: tag,
   }));
 
   return {
     id: id,
     slug: slug,
-    permalink: await generatePermalink({ id, slug, publishDate, category: category?.slug }),
+    permalink: locale + '/' + (await generatePermalink({ id, slug: baseSlug, publishDate, category: rawCategory })),
 
     publishDate: publishDate,
     updateDate: updateDate,
@@ -138,6 +140,18 @@ export const fetchPosts = async (): Promise<Array<Post>> => {
 };
 
 /** */
+export const getLocalePosts = async () => {
+  const posts = await fetchPosts();
+  const localePosts: Record<string, Post[]> = {};
+  posts.map((post) => {
+    const [locale] = post.slug.split('/');
+
+    localePosts[locale] = localePosts[locale] ? [...localePosts[locale], post] : [post];
+  });
+  return localePosts;
+};
+
+/** */
 export const findPostsBySlugs = async (slugs: Array<string>): Promise<Array<Post>> => {
   if (!Array.isArray(slugs)) return [];
 
@@ -176,68 +190,78 @@ export const findLatestPosts = async ({ count }: { count?: number }): Promise<Ar
 /** */
 export const getStaticPathsBlogList = async ({ paginate }: { paginate: PaginateFunction }) => {
   if (!isBlogEnabled || !isBlogListRouteEnabled) return [];
-  return paginate(await fetchPosts(), {
-    params: { blog: BLOG_BASE || undefined },
-    pageSize: blogPostsPerPage,
+  const localePosts = await getLocalePosts();
+  return Array.from(Object.entries(localePosts)).flatMap(([locale, posts]) => {
+    return paginate(posts, {
+      params: { locale, blog: BLOG_BASE || undefined },
+      pageSize: blogPostsPerPage,
+    });
   });
 };
 
 /** */
 export const getStaticPathsBlogPost = async () => {
   if (!isBlogEnabled || !isBlogPostRouteEnabled) return [];
-  return (await fetchPosts()).flatMap((post) => ({
-    params: {
-      blog: post.permalink,
-    },
-    props: { post },
-  }));
+  const localePosts = await getLocalePosts();
+  return Array.from(Object.entries(localePosts)).flatMap(([locale, posts]) => {
+    return posts.flatMap((post) => ({
+      params: {
+        locale,
+        blog: post.permalink.split('/').slice(1).join('/'),
+      },
+      props: { post },
+    }));  
+  });
 };
 
 /** */
 export const getStaticPathsBlogCategory = async ({ paginate }: { paginate: PaginateFunction }) => {
   if (!isBlogEnabled || !isBlogCategoryRouteEnabled) return [];
+  const localePosts = await getLocalePosts();
+  return Array.from(Object.entries(localePosts)).flatMap(([locale, posts]) => {
+    const categories: Record<string, Taxonomy> = {};
+    posts.map((post) => {
+      post.category?.slug && (categories[post.category.slug] = post.category);
+    });
 
-  const posts = await fetchPosts();
-  const categories: Record<string, Taxonomy> = {};
-  posts.map((post) => {
-    post.category?.slug && (categories[post.category.slug] = post.category);
+    return Array.from(Object.keys(categories)).flatMap((categorySlug) =>
+      paginate(
+        posts.filter((post) => post.category?.slug && categorySlug === post.category?.slug),
+        {
+          params: { locale, category: categorySlug.split('/').slice(1).join('/'), blog: CATEGORY_BASE || undefined },
+          pageSize: blogPostsPerPage,
+          props: { category: categories[categorySlug] },
+        }
+      )
+    );
   });
-
-  return Array.from(Object.keys(categories)).flatMap((categorySlug) =>
-    paginate(
-      posts.filter((post) => post.category?.slug && categorySlug === post.category?.slug),
-      {
-        params: { category: categorySlug, blog: CATEGORY_BASE || undefined },
-        pageSize: blogPostsPerPage,
-        props: { category: categories[categorySlug] },
-      }
-    )
-  );
 };
 
 /** */
 export const getStaticPathsBlogTag = async ({ paginate }: { paginate: PaginateFunction }) => {
   if (!isBlogEnabled || !isBlogTagRouteEnabled) return [];
+  const localePosts = await getLocalePosts();
 
-  const posts = await fetchPosts();
-  const tags: Record<string, Taxonomy> = {};
-  posts.map((post) => {
-    Array.isArray(post.tags) &&
-      post.tags.map((tag) => {
-        tags[tag?.slug] = tag;
-      });
+  return Array.from(Object.entries(localePosts)).flatMap(([locale, posts]) => {
+    const tags: Record<string, Taxonomy> = {};
+    posts.map((post) => {
+      Array.isArray(post.tags) &&
+        post.tags.map((tag) => {
+          tags[tag?.slug] = tag;
+        });
+    });
+
+    return Array.from(Object.keys(tags)).flatMap((tagSlug) =>
+      paginate(
+        posts.filter((post) => Array.isArray(post.tags) && post.tags.find((elem) => elem.slug === tagSlug)),
+        {
+          params: { locale, tag: tagSlug.split('/').slice(1).join('/'), blog: TAG_BASE || undefined },
+          pageSize: blogPostsPerPage,
+          props: { tag: tags[tagSlug] },
+        }
+      )
+    );
   });
-
-  return Array.from(Object.keys(tags)).flatMap((tagSlug) =>
-    paginate(
-      posts.filter((post) => Array.isArray(post.tags) && post.tags.find((elem) => elem.slug === tagSlug)),
-      {
-        params: { tag: tagSlug, blog: TAG_BASE || undefined },
-        pageSize: blogPostsPerPage,
-        props: { tag: tags[tagSlug] },
-      }
-    )
-  );
 };
 
 /** */

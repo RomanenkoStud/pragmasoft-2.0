@@ -27,6 +27,17 @@ const whenExternalScripts = (items = []) =>
 export default defineConfig({
   output: 'static',
 
+  i18n: {
+    defaultLocale: "en",
+    locales: ["en", "uk"],
+    routing: {
+      prefixDefaultLocale: true
+    },
+    fallback: {
+      uk: "en"
+    },
+  },
+
   integrations: [
     tailwind({
       applyBaseStyles: false,

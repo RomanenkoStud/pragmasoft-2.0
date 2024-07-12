@@ -1,0 +1,31 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Hero from './_sections/Hero.astro';
+import About from './_sections/About.astro';
+import MobileAppDev from './_sections/MobileAppDev.astro';
+import JavaServerApp from './_sections/JavaServerApp.astro';
+import CloudComputing from './_sections/CloudComputing.astro';
+import WebDesign from './_sections/WebDesign.astro';
+import Team from './_sections/Team.astro';
+import Quality from './_sections/Quality.astro';
+---
+
+<Layout metadata={{
+  ignoreTitleTemplate: true,
+}}>
+  <Hero/>
+
+  <About id="about"/>
+
+  <div id="projects">
+    <MobileAppDev id="mobile-app-development" />
+    <JavaServerApp id="java-app-development" />
+    <CloudComputing id="cloud-computing" />
+    <WebDesign id="web-design"/>
+  </div>
+
+  <Team id="team"/>
+
+  <Quality id="quality"/>
+</Layout>

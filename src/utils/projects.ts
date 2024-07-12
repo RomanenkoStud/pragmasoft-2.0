@@ -1,4 +1,4 @@
-import { fetchPosts } from './blog';
+import { getLocalePosts } from './blog';
 
 export type ProjectFeature = {
   title: string,
@@ -10,12 +10,11 @@ export type ProjectFeature = {
   href?: string,
 }
 
-export async function getProjectFeatures(category: string): Promise<ProjectFeature[]> {
-  const projects = (await fetchPosts())
-    .filter((projects) => projects.category?.slug && category === projects.category?.slug);
+export async function getProjectFeatures(category: string, locale: string = 'en'): Promise<ProjectFeature[]> {
+  const projects = (await getLocalePosts())[locale]
+    .filter((project) => project.category?.title && category === project.category?.title);
   
-  return (Promise.all(
-    projects.map(async (project) => ({
+  return projects.map((project) => ({
       ...project,
       description: project.tags?.map(({title}) => title).join(", ") || '',
       image: project.image? {
@@ -23,6 +22,6 @@ export async function getProjectFeatures(category: string): Promise<ProjectFeatu
         alt: project.title,
       } : undefined,
       href: project.permalink,
-    })))
+    })
   );
 }
