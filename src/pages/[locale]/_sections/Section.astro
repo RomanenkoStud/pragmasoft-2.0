@@ -1,5 +1,5 @@
 ---
-import { findSectionBySlug } from '~/utils/section';
+import type { Section } from '~/types';
 import ProjectSection from './ProjectSection.astro';
 import AboutSection from './AboutSection.astro';
 import TeamSection from './TeamSection.astro';
@@ -8,15 +8,13 @@ import TextSection from './TextSection.astro';
 
 type Props = {
   id?: string;
-  name: string,
+  section: Section;
 }
 
 const {
   id,
-  name,
+  section,
 } = Astro.props;
-
-const section = await findSectionBySlug(Astro.currentLocale + '/' + name);
 ---
 
 {

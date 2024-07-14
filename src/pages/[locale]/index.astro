@@ -1,0 +1,33 @@
+---
+import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
+
+import Layout from '~/layouts/PageLayout.astro';
+import Section from './_sections/Section.astro';
+
+import { getStaticPathsHome } from '~/utils/section';
+
+export const getStaticPaths = (async () => {
+  return await getStaticPathsHome();
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { locale, sections } = Astro.props as Props;
+
+const sectionMap = Object.fromEntries(sections.map(section => ([section.slug.replace(locale + '/', ''), section])));
+---
+
+<Layout metadata={{
+  ignoreTitleTemplate: true,
+}}>
+  {sectionMap["hero"] && <Section section={sectionMap["hero"]}/>}
+  {sectionMap["about"] && <Section id="about" section={sectionMap["about"]}/>}
+  <div id="projects">
+    {sectionMap["mobile"] && <Section id="mobile" section={sectionMap["mobile"]}/>}
+    {sectionMap["java"] && <Section id="java" section={sectionMap["java"]}/>}
+    {sectionMap["cloud"] && <Section id="cloud" section={sectionMap["cloud"]}/>}
+    {sectionMap["design"] && <Section id="design" section={sectionMap["design"]}/>}
+  </div>
+  {sectionMap["team"] && <Section id="team" section={sectionMap["team"]}/>}
+  {sectionMap["quality"] && <Section id="quality" section={sectionMap["quality"]}/>}
+</Layout>

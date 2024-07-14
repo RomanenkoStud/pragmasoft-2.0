@@ -107,10 +107,26 @@ export const fetchSections = async (): Promise<Array<Section>> => {
 };
 
 /** */
-export const findSectionBySlug = async (slug: string): Promise<Section> => {
+export const getLocaleSections = async () => {
   const sections = await fetchSections();
+  const localeSections: Record<string, Section[]> = {};
+  sections.map((section) => {
+    const [locale] = section.slug.split('/');
 
-  return sections.find(function (section: Section) {
-    return slug === section.slug;
-  }) as Section;
+    localeSections[locale] = localeSections[locale] ? [...localeSections[locale], section] : [section];
+  });
+  return localeSections;
+};
+
+/** */
+export const getStaticPathsHome = async () => {
+  const localeSections = await getLocaleSections();
+  return Array.from(Object.entries(localeSections)).flatMap(([locale, sections]) => {
+    return {
+      params: {
+        locale,
+      },
+      props: { locale, sections },
+    };  
+  });
 };
