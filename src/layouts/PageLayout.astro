@@ -12,17 +12,20 @@ export interface Props {
 }
 
 const { metadata } = Astro.props;
+
+const header = headerData(Astro.currentLocale);
+const footer = footerData(Astro.currentLocale);
 ---
 
 <Layout metadata={metadata}>
   <slot name="header">
-    <Header {...headerData} isSticky />
+    <Header {...header} isSticky />
     <!-- <Header {...headerData} isSticky showToggleTheme /> -->
   </slot>
   <main>
     <slot />
   </main>
   <slot name="footer">
-    <Footer {...footerData} />
+    <Footer {...footer} />
   </slot>
 </Layout>

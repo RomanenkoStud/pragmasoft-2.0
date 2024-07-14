@@ -1,37 +1,37 @@
 import { SITE } from 'astrowind:config';
-import { getPermalink, getBlogPermalink, getAsset } from './utils/permalinks';
+import { getHomePermalink } from './utils/permalinks';
 
-export const headerData = {
+export const headerData = (locale) => ({
   links: [
     {
       text: 'About us',
-      href: '#about',
+      href: getHomePermalink(locale) + '#about',
     },
     {
       text: 'Projects',
-      href: '#projects',
+      href: getHomePermalink(locale) + '#projects',
     },
     {
       text: 'Our team',
-      href: '#team',
+      href: getHomePermalink(locale) + '#team',
     },
     {
       text: 'Quality',
-      href: '#quality',
+      href: getHomePermalink(locale) + '#quality',
     },
     {
       text: 'Vacancies',
-      href: '#vacancies',
+      href: getHomePermalink(locale) + '#vacancies',
     },
   ],
   // actions: [{ text: 'Download', href: 'https://github.com/onwidget/astrowind', target: '_blank' }],
-};
+});
 
-export const footerData = {
+export const footerData = (locale) => ({
   secondaryLinks: [
-    { text: 'About', href: '#about' },
-    { text: 'Team', href: '#team' },
-    { text: 'Vacancies', href: '#vacancies' },
+    { text: 'About', href: getHomePermalink(locale) + '#about' },
+    { text: 'Team', href: getHomePermalink(locale) + '#team' },
+    { text: 'Vacancies', href: getHomePermalink(locale) + '#vacancies' },
   ],
   socialLinks: [
     { ariaLabel: 'X', icon: 'tabler:brand-x', href: '#' },
@@ -42,4 +42,4 @@ export const footerData = {
   footNote: `
     © ${(new Date()).getFullYear()} ${SITE?.name}. All rights reserved.
   `,
-};
+});

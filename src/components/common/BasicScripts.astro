@@ -57,12 +57,12 @@ import { UI } from 'astrowind:config';
         const isActive = isVisible && intersection > 0;
 
         if (isActive && section.id !== currentActiveSection) {
-          const matchingLink = document.querySelector(`a[href="#${section.id}"]`);
+          const matchingLink = document.querySelector(`a[href$="#${section.id}"]`);
           if (matchingLink) {
             matchingLink.parentElement.classList.toggle('active', true);
           }
           if (currentActiveSection) {
-            const prevLink = document.querySelector(`a[href="#${currentActiveSection}"]`);
+            const prevLink = document.querySelector(`a[href$="#${currentActiveSection}"]`);
             if (prevLink) {
               prevLink.parentElement.classList.remove('active');
             }

@@ -28,9 +28,7 @@ const background = section.background && optimizedBackgrounds[section.background
     title: "font-thin text-[40px] mb-20 text-center", 
     container: "text-start text-[18px] md:max-w-[970px] mx-auto",
   }}>
-    <Fragment slot="title">
-      {section.title}
-    </Fragment>
+    <Fragment slot="title" set:html={section.title}/>
     <Fragment slot="subtitle">
       {section.Content ? <section.Content /> : <Fragment set:html={section.content || ''} />}
     </Fragment>

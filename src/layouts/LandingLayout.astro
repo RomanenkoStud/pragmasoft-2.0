@@ -10,6 +10,8 @@ export interface Props {
 }
 
 const { metadata } = Astro.props;
+
+const header = headerData(Astro.currentLocale);
 ---
 
 <PageLayout metadata={metadata}>
@@ -19,7 +21,7 @@ const { metadata } = Astro.props;
   <Fragment slot="header">
     <slot name="header">
       <Header
-        links={headerData?.links[2] ? [headerData.links[2]] : undefined}
+        links={header?.links[2] ? [header.links[2]] : undefined}
         actions={[
           {
             text: 'Download',
