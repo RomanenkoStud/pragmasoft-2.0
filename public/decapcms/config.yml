@@ -16,7 +16,7 @@ collections:
       - { label: 'Title', name: 'title', widget: 'string' }
       - { label: 'Metadata', name: 'excerpt', widget: 'string', required: false, fields: [
           { label: 'Title', name: 'title', widget: 'string' },
-          { label: 'Description', name: 'title', widget: 'string' }
+          { label: 'Description', name: 'description', widget: 'string' }
         ]}
       - { label: 'Category', name: 'category', widget: 'string' }
       - {
