@@ -7,15 +7,17 @@ backend:
 media_folder: 'src/assets/images'
 public_folder: '/_astro'
 
+# Configure i18n for this collection.
+i18n:
+  structure: multiple_folders
+  locales: [en, uk]
+
 collections:
   - name: 'post'
     label: 'Post'
     folder: 'src/content/post'
-    # Configure i18n for this collection.
-    i18n:
-      structure: multiple_folders
-      locales: [en, uk]
     create: true
+    i18n: true
     fields:
       - { label: 'Title', name: 'title', widget: 'string' }
       - { label: 'Metadata', name: 'excerpt', widget: 'string', required: false, fields: [
