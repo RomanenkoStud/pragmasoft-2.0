@@ -20,7 +20,7 @@ collections:
     i18n: true
     fields:
       - { label: 'Title', name: 'title', widget: 'string', i18n: true }
-      - { label: 'Metadata', name: 'metadata', widget: 'object', fields: [
+      - { label: 'Metadata', name: 'metadata', widget: 'object', i18n: true, fields: [
           { label: 'Title', name: 'title', widget: 'string', i18n: true, required: false },
           { label: 'Description', name: 'description', widget: 'string', i18n: true, required: false }
         ]}
@@ -32,6 +32,7 @@ collections:
           allow_add: true,
           allow_delete: true,
           collapsed: false,
+          i18n: true,
           field: { label: 'Tag', name: 'tag', widget: 'string', i18n: true },
         }
       - { label: 'Image', name: 'image', widget: 'string' }
