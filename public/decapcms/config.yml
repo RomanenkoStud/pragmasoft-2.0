@@ -20,9 +20,9 @@ collections:
     i18n: true
     fields:
       - { label: 'Title', name: 'title', widget: 'string' }
-      - { label: 'Metadata', name: 'excerpt', widget: 'string', required: false, fields: [
-          { label: 'Title', name: 'title', widget: 'string' },
-          { label: 'Description', name: 'description', widget: 'string' }
+      - { label: 'Metadata', name: 'metadata', widget: 'object', fields: [
+          { label: 'Title', name: 'title', widget: 'string', required: false },
+          { label: 'Description', name: 'description', widget: 'string', required: false }
         ]}
       - { label: 'Category', name: 'category', widget: 'string' }
       - {
