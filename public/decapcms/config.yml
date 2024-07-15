@@ -11,6 +11,10 @@ collections:
   - name: 'post'
     label: 'Post'
     folder: 'src/content/post'
+    # Configure i18n for this collection.
+    i18n:
+      structure: multiple_folders
+      locales: [en, uk]
     create: true
     fields:
       - { label: 'Title', name: 'title', widget: 'string' }
