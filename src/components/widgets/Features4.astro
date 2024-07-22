@@ -27,7 +27,7 @@ const itemClasses = (classes?.items as Record<string, never>) ?? {};
 
 <WidgetWrapper id={id} isDark={isDark} containerClass={`relative max-w-full ${classes?.container ?? ''}`} bg={bg}>
   <Headline title={title} subtitle={subtitle} tagline={tagline} classes={{
-    title: `font-thin text-[40px] mb-20 text-center ${(classes.title as Record<string, string>)?.container ?? '' }`,
+    title: `font-light text-[40px] leading-none mb-20 text-center  ${(classes.title as Record<string, string>)?.container ?? '' }`,
     container: `text-start text-[18px] md:max-w-[970px] mx-auto ${(classes.headline as Record<string, string>)?.container ?? '' }`,
   }} />
   {<ItemGrid3
@@ -39,8 +39,8 @@ const itemClasses = (classes?.items as Record<string, never>) ?? {};
       container: `relative gap-4 md:gap-6 md:w-fit text-[18px] mt-[105px] mx-auto justify-items-center place-content-center ${itemClasses?.container}`,
       panel:
         `group cursor-pointer text-white w-[220px] h-[220px] shadow-[0_4px_30px_rgba(0,0,0,0.1)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur border border-[#ffffff29] bg-white dark:bg-slate-900 ${itemClasses?.panel}`,
-      title: `w-full font-thin text-center text-[1.2rem] leading-none mt-6 px-6 py-2 bg-[#50A0BE] uppercase -translate-y-12 group-hover:translate-y-0 transition-all ${itemClasses?.title}`,
-      description: `px-6 text-white translate-y-12 group-hover:translate-y-0 transition-all ${itemClasses?.description}`,
+      title: `w-full font-normal text-center text-[1.2rem] leading-none mt-6 px-1.5 line-clamp-2 py-2 bg-[#50A0BE] uppercase -translate-y-12 group-hover:translate-y-0 transition-all ${itemClasses?.title}`,
+      description: `px-6 text-white text-[18px] italic text-ellipsis line-clamp-3 max-h-[45%] translate-y-12 group-hover:translate-y-0 transition-all ${itemClasses?.description}`,
       content: `flex-1 opacity-0 group-hover:opacity-100 group-hover:backdrop-brightness-50 transition-all w-full ${itemClasses?.content}`,
       image: `absolute -z-10 inset-0 ${itemClasses?.image}`,
     }}

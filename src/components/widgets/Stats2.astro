@@ -32,20 +32,20 @@ const optimizedBackground = await getImage({src: backgroundImage, format: 'png'}
     {
       stats &&
         stats.map(({ amount, title, icon }) => (
-          <div class="p-4 md:w-1/4 sm:w-1/2 w-full min-w-[calc(100%/4)] text-center leading-none dark:md:border-slate-500 even:mt-[14%]">
+          <div class="font-heading p-4 md:w-1/4 sm:w-1/2 w-full min-w-[calc(100%/4)] text-center leading-none dark:md:border-slate-500 even:mt-[14%]">
             {icon && (
               <div class="flex items-center justify-center mx-auto mb-4 text-primary">
                 <Icon name={icon} class="w-10 h-10" />
               </div>
             )}
             {amount && (
-              <div class="font-heading text-secondary font-thin italic dark:text-white text-[72px]">
+              <div class="text-secondary font-light italic dark:text-white text-[72px]">
                 {amount}
               </div>
             )}
             {title && (
-              <div class="text-[12px] font-medium uppercase tracking-widest text-gray-800 dark:text-slate-400">
-                {title}
+              <div class="text-[14px] font-medium italic text-gray-800 dark:text-slate-400">
+                <Fragment set:html={title}/>
               </div>
             )}
           </div>

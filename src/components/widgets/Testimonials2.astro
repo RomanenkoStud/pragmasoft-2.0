@@ -17,7 +17,7 @@ const optimizedArrowLeft = await getImage({src: arrowLeft, format: 'png'});
 const optimizedArrowRight = await getImage({src: arrowRight, format: 'png'});
 
 ---
-<div class="relative hidden text-[18px] lg:flex flex-col justify-center top-[115px] left-[25px] w-[680px]"
+<div class="relative hidden font-secondary font-light text-[18px] italic lg:flex flex-col justify-center top-[115px] left-[25px] w-[680px]"
   style={`--pragma-arrow-left: url(${optimizedArrowLeft.src}); --pragma-arrow-right: url(${optimizedArrowRight.src});`}
   data-carousel data-carousel-auto data-carousel-timeout="3000">
   <div class="px-[25px] overflow-hidden">

@@ -22,6 +22,7 @@ const variants = {
   'blue': '#00B0F3',
 }
 const color = variant !== 'custom' ? variants[variant] : '';
+const text = variant === 'sky' || variant === 'orange' ? 'text-muted' : 'text-white';
 
 const projects = await getProjectFeatures(section.slug);
 ---
@@ -30,7 +31,7 @@ const projects = await getProjectFeatures(section.slug);
   <Features4
     title={section.title}
     classes={{
-      container: "bg-[var(--pragma-section-bg)] text-white",
+      container: `bg-[var(--pragma-section-bg)] ${text}`,
       items: {
         container: `${section.parallax ? 'parallax-items' : ''}`
       },
@@ -39,7 +40,7 @@ const projects = await getProjectFeatures(section.slug);
     items={[...projects, ...(section.defaultItem ? [section.defaultItem] : [])]}
     >
     <Fragment slot="subtitle">
-      <div class="hidden md:block">
+      <div class="hidden md:block font-light">
         {section.Content ? <section.Content /> : <Fragment set:html={section.content || ''} />}
       </div>
     </Fragment>
