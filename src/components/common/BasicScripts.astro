@@ -143,6 +143,12 @@ import { UI } from 'astrowind:config';
       newlink.click();
     });
 
+    attachEvent('[data-select-locale]', 'change', function (_, elem) {
+      const newlink = document.createElement('a');
+      newlink.href = elem.value;
+      newlink.click();
+    })
+
     const screenSize = window.matchMedia('(max-width: 767px)');
     screenSize.addEventListener('change', function () {
       document.querySelector('[data-aw-toggle-menu]')?.classList.remove('expanded');

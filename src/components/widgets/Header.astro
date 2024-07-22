@@ -3,6 +3,7 @@ import { Icon } from 'astro-icon/components';
 import Logo from '~/components/Logo.astro';
 import ToggleTheme from '~/components/common/ToggleTheme.astro';
 import ToggleMenu from '~/components/common/ToggleMenu.astro';
+import SelectLocale from '~/components/common/SelectLocale.astro'
 import Button from '~/components/ui/Button.astro';
 
 import { getHomePermalink } from '~/utils/permalinks';
@@ -157,6 +158,7 @@ const optimizedBackground = await getImage({src: bgImage, format: 'png'});
               </a>
             )
           }
+          <SelectLocale/>
         </div>
         {
           actions?.length ? (

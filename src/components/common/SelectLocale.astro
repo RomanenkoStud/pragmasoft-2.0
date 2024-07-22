@@ -1,0 +1,22 @@
+---
+import { languages } from '~/i18n/ui';
+
+export interface Props {
+  label?: string;
+  class?: string;
+}
+
+const {
+  label = 'Select language',
+  class:
+    className = 'uppercase text-muted dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 inline-flex items-center',
+} = Astro.props;
+---
+
+{
+  <select class={className} aria-label={label} data-select-locale>
+    {Object.entries(languages).map(([lang, label]) => (
+      <option value={lang} aria-label={label} title={label} selected={lang===Astro.currentLocale}>{lang}</option>
+    ))}
+  </select>
+}

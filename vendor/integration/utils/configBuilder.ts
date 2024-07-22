@@ -26,10 +26,14 @@ export interface MetaDataConfig extends Omit<MetaData, 'title'> {
     template: string;
   };
 }
-export interface I18NConfig {
-  language: string;
+export interface I18NLanguage {
+  label: string;
   textDirection: string;
   dateFormatter?: Intl.DateTimeFormat;
+}
+export interface I18NConfig {
+  defaultLocale: string;
+  locales: Record<string, I18NLanguage>;
 }
 export interface AppBlogConfig {
   isEnabled: boolean;
@@ -118,8 +122,13 @@ const getMetadata = (config: Config) => {
 
 const getI18N = (config: Config) => {
   const _default = {
-    language: 'en',
-    textDirection: 'ltr',
+    defaultLocale: 'en',
+    locales: {
+      en: {
+        label: 'English',
+        textDirection: 'ltr',
+      }
+    },
   };
 
   const value = merge({}, _default, config?.i18n ?? {});
