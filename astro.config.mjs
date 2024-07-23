@@ -9,8 +9,16 @@ import mdx from '@astrojs/mdx';
 import partytown from '@astrojs/partytown';
 import icon from 'astro-icon';
 import compress from 'astro-compress';
+import { loadEnv } from 'vite';
 
 import astrowind from './vendor/integration';
+
+const mode = process.env.NODE_ENV;
+
+// https://main.vitejs.dev/config/#using-environment-variables-in-config
+const {
+  SITE_NAME,
+} = loadEnv(mode, process.cwd(), '');
 
 import {
   readingTimeRemarkPlugin,
@@ -81,7 +89,10 @@ export default defineConfig({
     }),
 
     astrowind({
-      config: `./src/config-${import.meta.env.DEV ? 'dev' : 'prod'}.yaml`,
+      config: `./src/config.yaml`,
+      env: {
+        site: SITE_NAME,
+      },
     }),
   ],
 

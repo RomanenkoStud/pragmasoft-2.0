@@ -21,7 +21,7 @@
           "type": "string"
         }
       },
-      "required": ["name", "site", "base", "trailingSlash"],
+      "required": ["name", "base", "trailingSlash"],
       "additionalProperties": false
     },
     "metadata": {
@@ -107,14 +107,22 @@
     "i18n": {
       "type": "object",
       "properties": {
-        "language": {
+        "defaultLocale": {
           "type": "string"
         },
-        "textDirection": {
-          "type": "string"
+        "locales": {
+          "type": "object",
+          "properties": {
+            "label": {
+              "type": "string"
+            },
+            "textDirection": {
+              "type": "string"
+            }
+          }
         }
       },
-      "required": ["language", "textDirection"]
+      "required": ["defaultLocale", "locales"]
     },
     "apps": {
       "type": "object",

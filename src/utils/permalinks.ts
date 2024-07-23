@@ -106,6 +106,11 @@ export const getAsset = (path: string): string =>
 /** */
 const definitivePermalink = (permalink: string): string => createPath(BASE_PATHNAME, permalink);
 
+export const replacePermalinkLocale = (url: string, targetLocale: string): string => {
+  const [_locale,...path] = trimSlash(url).split('/');
+  return createPath(targetLocale, ...path);
+};
+
 type MenuItem = {
   type: string;
   url: string;

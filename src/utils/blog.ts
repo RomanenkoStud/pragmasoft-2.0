@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import type { Post, Taxonomy } from '~/types';
 import { APP_BLOG } from 'astrowind:config';
-import { cleanSlug, trimSlash, BLOG_BASE, POST_PERMALINK_PATTERN, CATEGORY_BASE, TAG_BASE } from './permalinks';
+import { cleanSlug, trimSlash, getPermalink, BLOG_BASE, POST_PERMALINK_PATTERN, CATEGORY_BASE, TAG_BASE } from './permalinks';
 
 const generatePermalink = async ({
   id,
@@ -33,11 +33,11 @@ const generatePermalink = async ({
     .replace('%minute%', minute)
     .replace('%second%', second);
 
-  return permalink
+  return getPermalink(permalink
     .split('/')
     .map((el) => trimSlash(el))
     .filter((el) => !!el)
-    .join('/');
+    .join('/'));
 };
 
 const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> => {
@@ -78,7 +78,7 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
   return {
     id: id,
     slug: slug,
-    permalink: locale + '/' + (await generatePermalink({ id, slug: baseSlug, publishDate, category: rawCategory })),
+    permalink: '/' + locale + (await generatePermalink({ id, slug: baseSlug, publishDate, category: rawCategory })),
 
     publishDate: publishDate,
     updateDate: updateDate,
@@ -207,7 +207,7 @@ export const getStaticPathsBlogPost = async () => {
     return posts.flatMap((post) => ({
       params: {
         locale,
-        blog: post.permalink.split('/').slice(1).join('/'),
+        blog: post.permalink.split('/').slice(2).join('/'),
       },
       props: { post },
     }));  

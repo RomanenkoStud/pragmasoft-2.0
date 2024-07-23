@@ -4,7 +4,7 @@ import os from 'node:os';
 import configBuilder from './utils/configBuilder';
 import loadConfig from './utils/loadConfig';
 
-export default ({ config: _themeConfig = 'src/config.yaml' } = {}) => {
+export default ({ config: _themeConfig = 'src/config.yaml', env = {}} = {}) => {
   let cfg;
   return {
     name: 'astrowind-integration',
@@ -26,6 +26,10 @@ export default ({ config: _themeConfig = 'src/config.yaml' } = {}) => {
 
         const rawJsonConfig = await loadConfig(_themeConfig);
         const { SITE, I18N, METADATA, APP_BLOG, UI, ANALYTICS } = configBuilder(rawJsonConfig);
+
+        if(env.site) {
+          SITE.site = env.site;
+        }
 
         updateConfig({
           site: SITE.site,
